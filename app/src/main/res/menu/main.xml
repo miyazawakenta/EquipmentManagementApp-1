@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="jp.second_wave.equipment_management_app.MainActivity">
+
+    <item
+        android:id="@+id/action_equipment_list"
+        android:orderInCategory="100"
+        android:title="@string/action_equipment_list"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_new"
+        android:orderInCategory="200"
+        android:title="@string/action_new"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_maker_list"
+        android:orderInCategory="300"
+        android:title="@string/action_maker_list"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_user_list"
+        android:orderInCategory="400"
+        android:title="@string/action_user_list"
+        app:showAsAction="never" />
+</menu>
