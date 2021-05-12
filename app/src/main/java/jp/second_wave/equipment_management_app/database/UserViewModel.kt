@@ -24,7 +24,6 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
     fun insert(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
             dao.insert(user)

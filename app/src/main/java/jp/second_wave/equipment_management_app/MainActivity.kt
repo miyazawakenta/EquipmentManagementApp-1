@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -21,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val varTextView = findViewById<View>(R.id.textView1) as TextView
         when (item.itemId) {
             R.id.action_equipment_list -> {
                 val intent = Intent(this, MainActivity::class.java)
@@ -29,11 +26,13 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_maker_list -> {
-                varTextView.setText(R.string.action_maker_list)
+                val intent = Intent(this, MakersActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_new -> {
-                varTextView.setText(R.string.action_new)
+                val intent = Intent(this, CategoriesActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_user_list -> {

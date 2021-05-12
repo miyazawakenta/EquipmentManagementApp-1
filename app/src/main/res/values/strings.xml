@@ -10,4 +10,7 @@
     <string name="first_name_label">名前（名）</string>
     <string name="create">新規登録</string>
     <string name="create_button">登録</string>
+    <string name="maker_name_label">メーカー名</string>
+    <string name="category_name_label">カテゴリー名</string>
+    <string name="management_number_label">管理番号</string>
 </resources>

@@ -40,7 +40,7 @@ class UserActivity : AppCompatActivity() {
                 email.text.toString()
             )
 
-            GlobalScope.launch(Dispatchers.Main){
+            GlobalScope.launch(Dispatchers.IO){
                 userViewModel.insert(user)
             }
 

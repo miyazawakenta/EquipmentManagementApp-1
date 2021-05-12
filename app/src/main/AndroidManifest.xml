@@ -10,6 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EquipmentManagementApp">
+        <activity android:name=".EquipmentActivity"></activity>
+        <activity android:name=".CategoryActivity" />
+        <activity android:name=".CategoriesActivity" />
+        <activity android:name=".MakersActivity" />
+        <activity android:name=".MakerActivity" />
         <activity android:name=".UserActivity" />
         <activity android:name=".UsersActivity" />
         <activity

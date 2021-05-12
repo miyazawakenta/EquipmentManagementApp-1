@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import jp.second_wave.equipment_management_app.database.UserViewModel
@@ -49,18 +48,20 @@ class UsersActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val varTextView = findViewById<View>(R.id.textView1) as TextView
         when (item.itemId) {
             R.id.action_equipment_list -> {
-                varTextView.setText(R.string.action_equipment_list)
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_maker_list -> {
-                varTextView.setText(R.string.action_maker_list)
+                val intent = Intent(this, MakersActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_new -> {
-                varTextView.setText(R.string.action_new)
+                val intent = Intent(this, CategoriesActivity::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_user_list -> {
