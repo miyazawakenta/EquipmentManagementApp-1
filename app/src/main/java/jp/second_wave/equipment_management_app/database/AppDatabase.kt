@@ -32,7 +32,8 @@ abstract class AppDatabase : RoomDatabase() {
       return Room.databaseBuilder(
         context,
         AppDatabase::class.java, "equipment_management.db"
-      ).build()
+      )
+        .build()
     }
   }
 }

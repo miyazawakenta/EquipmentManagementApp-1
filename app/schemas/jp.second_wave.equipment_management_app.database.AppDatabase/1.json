@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8a468f442090df487c2d0f77b9ee9bbd",
+    "identityHash": "27c96ead0583f91b777be4bb1e47bebf",
     "entities": [
       {
         "tableName": "users",
@@ -44,7 +44,7 @@
       },
       {
         "tableName": "equipments",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `management_number` INTEGER NOT NULL, `category_id` INTEGER NOT NULL, `maker_id` INTEGER NOT NULL, `model_name` TEXT NOT NULL, `equipment_type` TEXT, `user_id` TEXT, `usage` TEXT, `note` TEXT, `purchase_date` INTEGER, FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`maker_id`) REFERENCES `makers`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `management_number` INTEGER NOT NULL, `category_id` INTEGER NOT NULL, `maker_id` INTEGER NOT NULL, `model_name` TEXT NOT NULL, `equipment_type` TEXT, `user_id` INTEGER, `usage` TEXT, `note` TEXT, `purchase_date` INTEGER, FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`maker_id`) REFERENCES `makers`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -85,7 +85,7 @@
           {
             "fieldPath": "userId",
             "columnName": "user_id",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -349,7 +349,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8a468f442090df487c2d0f77b9ee9bbd')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '27c96ead0583f91b777be4bb1e47bebf')"
     ]
   }
 }

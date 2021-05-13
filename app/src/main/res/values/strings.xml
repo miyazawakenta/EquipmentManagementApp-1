@@ -13,4 +13,11 @@
     <string name="maker_name_label">メーカー名</string>
     <string name="category_name_label">カテゴリー名</string>
     <string name="management_number_label">管理番号</string>
+    <string name="model_name">モデル名</string>
+    <string name="equipment_type">種別</string>
+    <string name="user_id">使用者</string>
+    <string name="usage_label">用途</string>
+    <string name="note_label">メモ・備考</string>
+    <string name="equipment_create_button_label">登録</string>
+    <string name="purchase_date_label">購入日</string>
 </resources>

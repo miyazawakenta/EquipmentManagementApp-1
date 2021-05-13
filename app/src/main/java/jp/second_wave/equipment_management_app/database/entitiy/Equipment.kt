@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import jp.second_wave.equipment_management_app.database.entitiy.User
 
 @Entity(tableName = "equipments",
     foreignKeys = [
@@ -32,9 +31,8 @@ data class Equipment(
     @ColumnInfo(name = "maker_id") val makerId: Int,
     @ColumnInfo(name = "model_name") val modelName: String,
     @ColumnInfo(name = "equipment_type") val equipmentType: String?,
-    @ColumnInfo(name = "user_id") val userId: String?,
+    @ColumnInfo(name = "user_id") val userId: Int?,
     val usage: String?,
     val note: String?,
     val purchase_date: java.util.Date?
 )
-

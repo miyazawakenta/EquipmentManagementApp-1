@@ -10,13 +10,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EquipmentManagementApp">
-        <activity android:name=".EquipmentActivity"></activity>
-        <activity android:name=".CategoryActivity" />
-        <activity android:name=".CategoriesActivity" />
-        <activity android:name=".MakersActivity" />
-        <activity android:name=".MakerActivity" />
-        <activity android:name=".UserActivity" />
-        <activity android:name=".UsersActivity" />
+        <activity
+            android:name=".EquipmentActivity"
+            android:label="機材登録" />
+        <activity
+            android:name=".CategoryActivity"
+            android:label="カテゴリー登録" />
+        <activity
+            android:name=".CategoriesActivity"
+            android:label="カテゴリー選択" />
+        <activity
+            android:name=".MakersActivity"
+            android:label="メーカー一覧" />
+        <activity
+            android:name=".MakerActivity"
+            android:label="メーカー登録" />
+        <activity
+            android:name=".UserActivity"
+            android:label="使用者登録" />
+        <activity
+            android:name=".UsersActivity"
+            android:label="使用者一覧" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
