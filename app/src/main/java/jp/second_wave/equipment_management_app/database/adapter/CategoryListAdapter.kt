@@ -1,4 +1,4 @@
-package jp.second_wave.equipment_management_app.database
+package jp.second_wave.equipment_management_app.database.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -26,7 +26,6 @@ class CategoryListAdapter(context: Context, private val categories: List<Categor
         return position.toLong()
     }
 
-    @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = layoutInflater.inflate(R.layout.category, parent, false)
         val category = categories[position]

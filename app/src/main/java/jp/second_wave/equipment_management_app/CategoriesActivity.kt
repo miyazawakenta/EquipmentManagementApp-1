@@ -8,8 +8,8 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import jp.second_wave.equipment_management_app.database.CategoryListAdapter
-import jp.second_wave.equipment_management_app.database.CategoryViewModel
+import jp.second_wave.equipment_management_app.database.adapter.CategoryListAdapter
+import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.Category
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -25,9 +25,17 @@ class CategoriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
+
+        setCategoryList()
+
+        val button: Button = findViewById<View>(R.id.start_category) as Button
+        button.setOnClickListener { startCreateCategory() }
+    }
+
+    private fun setCategoryList() {
         val categoryViewModel: CategoryViewModel by viewModels()
 
-        GlobalScope.launch(Dispatchers.Main){
+        GlobalScope.launch(Dispatchers.Main) {
             val categories = categoryViewModel.getAll()
             val data = ArrayList<String>()
             categories.forEach { data.add(it.CategoryName) }
@@ -37,9 +45,6 @@ class CategoriesActivity : AppCompatActivity() {
             listView.adapter = adapter
             listView.onItemClickListener = ListItemClickListener()
         }
-
-        val button: Button = findViewById<View>(R.id.start_category) as Button
-        button.setOnClickListener { startCreateCategory() }
     }
 
     private inner class ListItemClickListener: AdapterView.OnItemClickListener{

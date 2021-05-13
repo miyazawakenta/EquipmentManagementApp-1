@@ -1,9 +1,6 @@
 package jp.second_wave.equipment_management_app.database.entitiy
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "equipments",
     foreignKeys = [
@@ -36,3 +33,10 @@ data class Equipment(
     val note: String?,
     val purchase_date: java.util.Date?
 )
+
+class EquipmentAndUser {
+    @Embedded
+    lateinit var equipment: Equipment
+    @Relation(parentColumn = "user_id", entityColumn = "id")
+    lateinit var user: User
+}

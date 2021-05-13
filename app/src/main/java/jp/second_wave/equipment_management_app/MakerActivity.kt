@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
-import jp.second_wave.equipment_management_app.database.MakerViewModel
+import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.Maker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -1,8 +1,9 @@
-package jp.second_wave.equipment_management_app.database
+package jp.second_wave.equipment_management_app.database.view_model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import jp.second_wave.equipment_management_app.database.AppDatabase
 import jp.second_wave.equipment_management_app.database.dao.CategoryDao
 import jp.second_wave.equipment_management_app.database.entitiy.Category
 import kotlinx.coroutines.Dispatchers

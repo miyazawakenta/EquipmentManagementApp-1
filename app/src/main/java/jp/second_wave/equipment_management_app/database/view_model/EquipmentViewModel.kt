@@ -1,4 +1,4 @@
-package jp.second_wave.equipment_management_app.database
+package jp.second_wave.equipment_management_app.database.view_model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import jp.second_wave.equipment_management_app.database.AppDatabase
 import jp.second_wave.equipment_management_app.database.dao.EquipmentDao
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
+import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,6 +25,12 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    suspend fun getEquipmentAndUserAll() :List<EquipmentAndUser> {
+        return withContext(Dispatchers.IO) {
+            dao.getEquipmentAndUserAll()
+        }
+    }
+
     fun insert(equipment: Equipment) {
         viewModelScope.launch(Dispatchers.IO) {
             dao.insert(equipment)
@@ -35,5 +42,6 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
             dao.update(equipment)
         }
     }
+
 
 }

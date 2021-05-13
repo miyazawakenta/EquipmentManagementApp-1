@@ -2,6 +2,7 @@ package jp.second_wave.equipment_management_app.database.dao
 
 import androidx.room.*
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
+import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndUser
 
 @Dao
 interface EquipmentDao {
@@ -19,4 +20,8 @@ interface EquipmentDao {
 
     @Delete
     fun delete(equipment: Equipment)
+
+    @Transaction
+    @Query("SELECT * FROM equipments")
+    fun getEquipmentAndUserAll(): List<EquipmentAndUser>
 }

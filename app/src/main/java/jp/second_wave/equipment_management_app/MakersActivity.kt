@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.activity.viewModels
-import jp.second_wave.equipment_management_app.database.MakerViewModel
+import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,6 +20,13 @@ class MakersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_makers)
 
+        setMakerList()
+
+        val button: Button = findViewById<View>(R.id.start_maker) as Button
+        button.setOnClickListener { startCreateMaker() }
+    }
+
+    private fun setMakerList() {
         val makerViewModel: MakerViewModel by viewModels()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -27,13 +34,11 @@ class MakersActivity : AppCompatActivity() {
             val data = ArrayList<String>()
 
             makers.forEach { data.add(it.makerName) }
-            val adapter = ArrayAdapter(this@MakersActivity, android.R.layout.simple_list_item_1, data)
+            val adapter =
+                ArrayAdapter(this@MakersActivity, android.R.layout.simple_list_item_1, data)
             val listView: ListView = findViewById(R.id.maker_list)
             listView.adapter = adapter
         }
-
-        val button: Button = findViewById<View>(R.id.start_maker) as Button
-        button.setOnClickListener { startCreateMaker() }
     }
 
     private fun startCreateMaker() {

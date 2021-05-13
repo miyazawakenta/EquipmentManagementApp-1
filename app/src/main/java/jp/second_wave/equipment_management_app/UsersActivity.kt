@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import jp.second_wave.equipment_management_app.database.UserViewModel
+import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,6 +20,14 @@ class UsersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
+
+        setUserList()
+
+        val button: Button = findViewById<View>(R.id.start_user) as Button
+        button.setOnClickListener { startCreateUser() }
+    }
+
+    private fun setUserList() {
         val userViewModel: UserViewModel by viewModels()
 
         GlobalScope.launch(Dispatchers.Main){
@@ -32,9 +40,6 @@ class UsersActivity : AppCompatActivity() {
             val listView: ListView = findViewById(R.id.user_list)
             listView.adapter = adapter
         }
-
-        val button: Button = findViewById<View>(R.id.start_user) as Button
-        button.setOnClickListener { startCreateUser() }
     }
 
     private fun startCreateUser() {

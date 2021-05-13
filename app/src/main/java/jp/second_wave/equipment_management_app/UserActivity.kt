@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import jp.second_wave.equipment_management_app.database.UserViewModel
+import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
