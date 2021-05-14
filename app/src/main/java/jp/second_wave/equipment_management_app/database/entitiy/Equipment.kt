@@ -26,10 +26,10 @@ data class Equipment(
     @ColumnInfo(name = "management_number") val managementNumber: Int,
     @ColumnInfo(name = "category_id") val categoryId: Int,
     @ColumnInfo(name = "maker_id") val makerId: Int,
-    @ColumnInfo(name = "model_name") val modelName: String,
-    @ColumnInfo(name = "equipment_type") val equipmentType: String?,
+    @ColumnInfo(name = "model_name") var modelName: String,
+    @ColumnInfo(name = "equipment_type") var equipmentType: String?,
     @ColumnInfo(name = "user_id") val userId: Int?,
-    val usage: String?,
-    val note: String?,
+    var usage: String?,
+    var note: String?,
     val purchase_date: java.util.Date?
 )

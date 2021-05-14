@@ -30,14 +30,12 @@ class EquipmentListAdapter(private val context: Context, private val equipments:
         val view = layoutInflater.inflate(R.layout.equipment, parent, false)
         val equipment = equipments[position].equipment
         val user = equipments[position].user
-        val maker = equipments[position].maker
         val category = equipments[position].category
 
         val vName = view.findViewById<TextView>(R.id.name)
         val vComment = view.findViewById<TextView>(R.id.comment)
         val vManagementNumber = view.findViewById<TextView>(R.id.equipment_management_number)
         val vUser = view.findViewById<TextView>(R.id.user_name)
-        val vMaker = view.findViewById<TextView>(R.id.maker)
         val vCategory = view.findViewById<TextView>(R.id.category)
 
         val categoryId = String.format("%2s", equipment.categoryId.toString()).replace(" ", "0")
@@ -47,7 +45,6 @@ class EquipmentListAdapter(private val context: Context, private val equipments:
         vName.text = equipment.modelName
         vComment.text = equipment.note
         vManagementNumber.text = context.getString(R.string.equipment_management_number_string, categoryId, managementNumberString)
-        vMaker.text = maker.makerName
         vCategory.text = category.CategoryName
 
         return view

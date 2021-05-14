@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import jp.second_wave.equipment_management_app.adapter.UserListAdapter
 import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.User
 import kotlinx.coroutines.Dispatchers
@@ -34,21 +32,80 @@ class UserActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main){
             val users = userViewModel.getAll()
-            val data = ArrayList<String>()
-            users.forEach{
-                data.add(it.firstName)
-            }
-            val adapter = ArrayAdapter(this@UserActivity, android.R.layout.simple_list_item_1, data)
+            val adapter = UserListAdapter(this@UserActivity, users)
             val listView: ListView = findViewById(R.id.user_list)
             listView.adapter = adapter
+            listView.onItemClickListener = ListItemClickListener()
         }
+    }
+
+    private inner class ListItemClickListener: AdapterView.OnItemClickListener{
+        override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            val user = parent.getItemAtPosition(position) as User
+
+            setToUpdateUserPage(user)
+        }
+    }
+
+    private fun setToUserListPage() {
+        setContentView(R.layout.activity_users)
+        title = getString(R.string.menu_user_list)
+
+        setUserList()
+
+        val button: Button = findViewById<View>(R.id.to_create_user_page) as Button
+        button.setOnClickListener { setToCreateUserPage() }
+    }
+
+    private fun setToUpdateUserPage(user: User) {
+        setContentView(R.layout.activity_user)
+        title = getString(R.string.update)
+
+        val lastName = findViewById<View>(R.id.last_name) as EditText
+        val firstName = findViewById<View>(R.id.first_name) as EditText
+        val email = findViewById<View>(R.id.email) as EditText
+        lastName.setText(user.lastName)
+        firstName.setText(user.firstName)
+        email.setText(user.email)
+
+        val button: Button = findViewById<View>(R.id.create_user_button) as Button
+        button.setOnClickListener { updateUser(user) }
     }
 
     private fun setToCreateUserPage() {
         setContentView(R.layout.activity_user)
+        title = getString(R.string.user_create)
 
         val button: Button = findViewById<View>(R.id.create_user_button) as Button
         button.setOnClickListener { createUser() }
+    }
+
+    private fun deleteUser(user: User) {
+        // TODO: 削除処理
+    }
+
+    private fun updateUser(user: User) {
+        val userViewModel: UserViewModel by viewModels()
+
+        val lastName = findViewById<View>(R.id.last_name) as EditText
+        val firstName = findViewById<View>(R.id.first_name) as EditText
+        val email = findViewById<View>(R.id.email) as EditText
+
+        if (lastName.text.toString().isEmpty()) {
+            lastName.error = "文字を入力してください"
+        } else {
+            user.lastName = lastName.text.toString()
+            user.firstName = firstName.text.toString()
+            user.email = email.text.toString()
+            GlobalScope.launch(Dispatchers.IO){
+                userViewModel.update(user)
+            }
+
+            val toast: Toast = Toast.makeText(this, "更新しました", Toast.LENGTH_SHORT)
+            toast.show()
+
+            setToUserListPage()
+        }
     }
 
     private fun createUser() {
@@ -72,8 +129,10 @@ class UserActivity : AppCompatActivity() {
                 userViewModel.insert(user)
             }
 
-            setUserList()
-            setContentView(R.layout.activity_users)
+            val toast: Toast = Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT)
+            toast.show()
+
+            setToUserListPage()
         }
     }
 

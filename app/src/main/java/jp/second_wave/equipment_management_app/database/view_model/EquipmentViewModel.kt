@@ -25,6 +25,12 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    suspend fun findById(id: Int) : Equipment {
+        return withContext(Dispatchers.IO) {
+            dao.findById(id)
+        }
+    }
+
     suspend fun getMaxManagementNumber(categoryId: Int) :Int {
         return withContext(Dispatchers.IO) {
             dao.getMaxManagementNumber(categoryId)

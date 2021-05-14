@@ -19,6 +19,7 @@
             <Button
                 android:id="@+id/create_equipment_button"
                 android:layout_width="100dp"
+                android:layout_gravity="end"
                 android:layout_height="wrap_content"
                 android:text="@string/create" />
         </LinearLayout>
@@ -32,6 +33,7 @@
                 android:id="@+id/equipment_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
         </LinearLayout>
     </LinearLayout>
 

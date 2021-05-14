@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import jp.second_wave.equipment_management_app.adapter.EquipmentListAdapter
+import jp.second_wave.equipment_management_app.database.entitiy.Equipment
+import jp.second_wave.equipment_management_app.database.entitiy.User
 import jp.second_wave.equipment_management_app.database.view_model.EquipmentViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,7 +38,22 @@ class MainActivity : AppCompatActivity() {
             val adapter = EquipmentListAdapter(applicationContext, equipments)
             val listView: ListView = findViewById(R.id.equipment_list)
             listView.adapter = adapter
+            listView.onItemClickListener = ListItemClickListener()
         }
+    }
+
+    private inner class ListItemClickListener: AdapterView.OnItemClickListener{
+        override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            val equipment = parent.getItemAtPosition(position) as Equipment
+
+            startUpdateEquipment(equipment)
+        }
+    }
+
+    private fun startUpdateEquipment(equipment: Equipment) {
+        val intent = Intent(this, EquipmentActivity::class.java)
+        intent.putExtra("equipmentId", equipment.id)
+        startActivity(intent)
     }
 
     private fun startCreateEquipment() {

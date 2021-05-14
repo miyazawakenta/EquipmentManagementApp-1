@@ -15,7 +15,7 @@
             android:label="機材登録" />
         <activity
             android:name=".CategoryActivity"
-            android:label="カテゴリー一覧" />
+            android:label="@string/menu_category_list" />
         <activity
             android:name=".MakerActivity"
             android:label="メーカー一覧" />

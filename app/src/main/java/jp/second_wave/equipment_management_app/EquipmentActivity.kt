@@ -16,20 +16,46 @@ import kotlinx.coroutines.launch
 
 class EquipmentActivity : AppCompatActivity() {
 
-    private var categoryId = 1
+    private var categoryId = 0
+    private var equipmentId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equipment)
 
         categoryId = intent.getIntExtra("categoryId", 0)
+        equipmentId = intent.getIntExtra("equipmentId", 0)
 
-        setManagementNumber()
-        setMakerSpinner()
-        setPurchaseDateCalender()
-        setUserSpinner()
+        if ( equipmentId == 0) {
 
-        val button: Button = findViewById<View>(R.id.equipment_create_button) as Button
-        button.setOnClickListener { createEquipment() }
+            setManagementNumber()
+            setMakerSpinner()
+            setPurchaseDateCalender()
+            setUserSpinner()
+
+            val button: Button = findViewById<View>(R.id.equipment_create_button) as Button
+            button.setOnClickListener { createEquipment() }
+        } else {
+
+            val equipmentViewModel: EquipmentViewModel by viewModels()
+            GlobalScope.launch(Dispatchers.Main) {
+                val equipment = equipmentViewModel.findById(equipmentId)
+                val managementNumber = findViewById<View>(R.id.management_number) as TextView
+                val managementNumberString = String.format("%3s", equipment.managementNumber.toString()).replace(" ", "0")
+                managementNumber.text = managementNumberString
+
+                val modelName = findViewById<View>(R.id.model_name) as EditText
+                val equipmentType = findViewById<View>(R.id.equipment_type) as EditText
+                val usage = findViewById<View>(R.id.usage) as EditText
+                val note = findViewById<View>(R.id.note) as EditText
+                modelName.setText(equipment.modelName)
+                equipmentType.setText(equipment.equipmentType)
+                usage.setText(equipment.usage)
+                note.setText(equipment.note)
+                val button: Button = findViewById<View>(R.id.equipment_create_button) as Button
+                button.setOnClickListener { updateEquipment(equipment) }
+            }
+        }
     }
 
     private fun setUserSpinner() {
@@ -41,7 +67,7 @@ class EquipmentActivity : AppCompatActivity() {
             val userIds = ArrayList<String>()
             users.forEach {
                 val replaceId = String.format("%3s", it.id.toString()).replace(" ", "0")
-                userIds.add("${replaceId}: ${it.firstName}")
+                userIds.add("${replaceId}: ${it.lastName}")
             }
 
             val adapter = ArrayAdapter(this@EquipmentActivity, android.R.layout.simple_spinner_item , userIds)
@@ -83,6 +109,34 @@ class EquipmentActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
     }
+    private fun updateEquipment(equipment: Equipment) {
+        val equipmentViewModel: EquipmentViewModel by viewModels()
+        val managementNumber = findViewById<View>(R.id.management_number) as TextView
+        val makerSpinner = findViewById<View>(R.id.maker_spinner) as Spinner
+        val modelName = findViewById<View>(R.id.model_name) as EditText
+        val equipmentType = findViewById<View>(R.id.equipment_type) as EditText
+        val userSpinner = findViewById<View>(R.id.user_spinner) as Spinner
+        val usage = findViewById<View>(R.id.usage) as EditText
+        val note = findViewById<View>(R.id.note) as EditText
+        val purchaseDate = findViewById<View>(R.id.purchase_date) as EditText
+        if (modelName.text.toString().isEmpty()) {
+            modelName.error = "モデル名をいれてください"
+        } else {
+            equipment.modelName = modelName.text.toString()
+            equipment.equipmentType = equipmentType.text.toString()
+            equipment.usage = usage.text.toString()
+            equipment.note = note.text.toString()
+            GlobalScope.launch(Dispatchers.IO) {
+                equipmentViewModel.update(equipment)
+            }
+            val toast: Toast = Toast.makeText(this, "更新しました。", Toast.LENGTH_SHORT)
+            toast.show()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
 
     private fun createEquipment() {
         val equipmentViewModel: EquipmentViewModel by viewModels()
@@ -96,7 +150,7 @@ class EquipmentActivity : AppCompatActivity() {
         val purchaseDate = findViewById<View>(R.id.purchase_date) as EditText
 
         if (modelName.text.toString().isEmpty()) {
-            modelName.error = "文字を入力してください"
+            modelName.error = "モデル名をいれてください"
         } else {
             val userIdString = userSpinner.selectedItem.toString().split(":")[0]
             val makerIdString = makerSpinner.selectedItem.toString().split(":")[0]
@@ -115,6 +169,10 @@ class EquipmentActivity : AppCompatActivity() {
             GlobalScope.launch(Dispatchers.IO) {
                 equipmentViewModel.insert(equipment)
             }
+
+            val toast: Toast = Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT)
+            toast.show()
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.widget.*
 import androidx.activity.viewModels
 import jp.second_wave.equipment_management_app.adapter.CategoryListAdapter
 import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
@@ -60,9 +57,22 @@ class CategoryActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun setToCategoryListPage() {
+        setContentView(R.layout.activity_categories)
+        title = getString(R.string.menu_category_list)
+
+        setCategoryList()
+
+        val button: Button = findViewById<View>(R.id.to_create_category_page) as Button
+        button.setOnClickListener { setToCreateCategoryPage() }
+
+    }
+
     // 新規登録画面へ切り替える
     private fun setToCreateCategoryPage() {
         setContentView(R.layout.activity_category)
+        title = getString(R.string.category_create)
+
         val button: Button = findViewById<View>(R.id.create_category_button) as Button
         button.setOnClickListener { createCategory() }
     }
@@ -85,8 +95,10 @@ class CategoryActivity : AppCompatActivity() {
                 categoryViewModel.insert(category)
             }
 
-            setCategoryList()
-            setContentView(R.layout.activity_categories)
+            val toast: Toast = Toast.makeText(this, "登録しました", Toast.LENGTH_SHORT)
+            toast.show()
+
+            setToCategoryListPage()
         }
 
     }
