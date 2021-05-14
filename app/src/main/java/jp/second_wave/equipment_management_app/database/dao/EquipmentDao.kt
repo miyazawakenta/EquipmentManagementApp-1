@@ -2,7 +2,7 @@ package jp.second_wave.equipment_management_app.database.dao
 
 import androidx.room.*
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
-import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndUser
+import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndRelation
 
 @Dao
 interface EquipmentDao {
@@ -23,5 +23,8 @@ interface EquipmentDao {
 
     @Transaction
     @Query("SELECT * FROM equipments")
-    fun getEquipmentAndUserAll(): List<EquipmentAndUser>
+    fun getEquipmentAndRelationAll(): List<EquipmentAndRelation>
+
+    @Query("SELECT MAX(management_number) FROM equipments WHERE category_id = :categoryId")
+    fun getMaxManagementNumber(categoryId: Int): Int
 }

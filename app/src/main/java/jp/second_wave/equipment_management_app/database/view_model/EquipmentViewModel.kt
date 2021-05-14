@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import jp.second_wave.equipment_management_app.database.AppDatabase
 import jp.second_wave.equipment_management_app.database.dao.EquipmentDao
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
-import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndUser
+import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndRelation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,9 +25,15 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    suspend fun getEquipmentAndUserAll() :List<EquipmentAndUser> {
+    suspend fun getMaxManagementNumber(categoryId: Int) :Int {
         return withContext(Dispatchers.IO) {
-            dao.getEquipmentAndUserAll()
+            dao.getMaxManagementNumber(categoryId)
+        }
+    }
+
+    suspend fun getEquipmentAndRelationAll() :List<EquipmentAndRelation> {
+        return withContext(Dispatchers.IO) {
+            dao.getEquipmentAndRelationAll()
         }
     }
 

@@ -1,4 +1,4 @@
-package jp.second_wave.equipment_management_app.database.adapter
+package jp.second_wave.equipment_management_app.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import jp.second_wave.equipment_management_app.R
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
-import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndUser
+import jp.second_wave.equipment_management_app.database.entitiy.EquipmentAndRelation
 
-class EquipmentListAdapter(private val context: Context, private val equipments: List<EquipmentAndUser>) : BaseAdapter() {
+class EquipmentListAdapter(private val context: Context, private val equipments: List<EquipmentAndRelation>) : BaseAdapter() {
 
     private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -30,11 +30,15 @@ class EquipmentListAdapter(private val context: Context, private val equipments:
         val view = layoutInflater.inflate(R.layout.equipment, parent, false)
         val equipment = equipments[position].equipment
         val user = equipments[position].user
+        val maker = equipments[position].maker
+        val category = equipments[position].category
 
         val vName = view.findViewById<TextView>(R.id.name)
         val vComment = view.findViewById<TextView>(R.id.comment)
         val vManagementNumber = view.findViewById<TextView>(R.id.equipment_management_number)
         val vUser = view.findViewById<TextView>(R.id.user_name)
+        val vMaker = view.findViewById<TextView>(R.id.maker)
+        val vCategory = view.findViewById<TextView>(R.id.category)
 
         val categoryId = String.format("%2s", equipment.categoryId.toString()).replace(" ", "0")
         val managementNumberString = String.format("%3s", equipment.managementNumber.toString()).replace(" ", "0")
@@ -43,6 +47,9 @@ class EquipmentListAdapter(private val context: Context, private val equipments:
         vName.text = equipment.modelName
         vComment.text = equipment.note
         vManagementNumber.text = context.getString(R.string.equipment_management_number_string, categoryId, managementNumberString)
+        vMaker.text = maker.makerName
+        vCategory.text = category.CategoryName
+
         return view
     }
 

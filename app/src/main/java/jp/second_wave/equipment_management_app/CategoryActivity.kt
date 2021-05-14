@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.activity.viewModels
-import jp.second_wave.equipment_management_app.database.adapter.CategoryListAdapter
+import jp.second_wave.equipment_management_app.adapter.CategoryListAdapter
 import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.Category
 import kotlinx.coroutines.Dispatchers
@@ -56,7 +56,7 @@ class CategoryActivity : AppCompatActivity() {
     // Listの項目タップで機材登録画面へ遷移する
     private fun startCreateEquipment(item: Category) {
         val intent = Intent(this, EquipmentActivity::class.java)
-        intent.putExtra("id", item.id)
+        intent.putExtra("categoryId", item.id)
         startActivity(intent)
     }
 

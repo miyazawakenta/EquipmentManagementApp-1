@@ -7,8 +7,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
+        android:padding="10dp"
         android:layout_height="match_parent">
 
         <TableRow
@@ -20,17 +19,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:labelFor="@id/management_number"
                 android:text="@string/management_number_label" />
 
-            <EditText
+            <TextView
                 android:id="@+id/management_number"
                 android:layout_width="0dp"
-                android:gravity="end"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:inputType="text"
-                android:autofillHints="" />
+                android:layout_gravity="end"
+                android:layout_weight="0.5" />
 
         </TableRow>
 
@@ -43,22 +39,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:labelFor="@id/maker_id"
+                android:labelFor="@id/maker_spinner"
                 android:text="@string/maker_name_label" />
-
-            <EditText
-                android:id="@+id/maker_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="text" />
 
             <Spinner
                 android:id="@+id/maker_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
         </TableRow>
 
         <TableRow
@@ -71,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:labelFor="@id/model_name"
-                android:text="@string/model_name" />
+                android:text="@string/model_name_label" />
 
             <EditText
                 android:id="@+id/model_name"
@@ -93,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:labelFor="@id/equipment_type"
-                android:text="@string/equipment_type" />
+                android:text="@string/equipment_type_label" />
 
             <EditText
                 android:id="@+id/equipment_type"
@@ -113,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:labelFor="@id/user_id"
-                android:text="@string/user_id" />
+                android:text="@string/user_label" />
 
             <EditText
                 android:id="@+id/user_id"
@@ -194,7 +182,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_gravity="end"
-                android:text="@string/equipment_create_button_label" />
+                android:text="@string/save" />
 
         </TableRow>
 

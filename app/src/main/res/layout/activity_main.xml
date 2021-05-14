@@ -20,7 +20,7 @@
                 android:id="@+id/create_equipment_button"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/create_equipment_button_label2" />
+                android:text="@string/create" />
         </LinearLayout>
 
         <LinearLayout

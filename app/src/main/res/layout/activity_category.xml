@@ -10,7 +10,7 @@
         android:id="@+id/category_name_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:labelFor="@id/last_name"
+        android:labelFor="@id/category_name"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:paddingTop="5dp"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:autofillHints=""
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -43,6 +43,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/create_button" />
+        android:text="@string/save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

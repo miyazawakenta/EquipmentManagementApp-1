@@ -1,8 +1,8 @@
 package jp.second_wave.equipment_management_app
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,11 +11,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import androidx.activity.viewModels
-import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
+import androidx.appcompat.app.AppCompatActivity
 import jp.second_wave.equipment_management_app.database.entitiy.Maker
+import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class MakerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,8 @@ class MakerActivity : AppCompatActivity() {
     // 新規登録画面へ切り替える
     private fun setToCreateMakerPage() {
         setContentView(R.layout.activity_maker)
+        title = getString(R.string.create)
+
         val button: Button = findViewById<View>(R.id.create_maker_button) as Button
         button.setOnClickListener { createMaker() }
     }

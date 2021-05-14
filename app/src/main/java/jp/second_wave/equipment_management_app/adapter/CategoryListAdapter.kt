@@ -1,6 +1,5 @@
-package jp.second_wave.equipment_management_app.database.adapter
+package jp.second_wave.equipment_management_app.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View

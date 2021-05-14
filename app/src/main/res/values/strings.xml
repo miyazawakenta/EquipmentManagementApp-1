@@ -8,27 +8,34 @@
     <string name="menu_new_equipment">新規登録</string>
     <string name="menu_user_list">使用者一覧</string>
 
-    <!-- メーカー一覧 -->
+    <!-- メーカー -->
+    <string name="maker_create">メーカー 新規登録</string>
+    <string name="maker_name_label">メーカー名</string>
 
+    <!-- カテゴリー -->
+    <string name="category_create">カテゴリー 新規登録</string>
+    <string name="category_name_label">カテゴリー名</string>
 
+    <!-- 使用者 -->
+    <string name="user_create">使用者 新規登録</string>
     <string name="email_label">メールアドレス</string>
     <string name="last_name_label">名前（姓）</string>
     <string name="first_name_label">名前（名）</string>
-    <string name="create">新規登録</string>
-    <string name="create_button">登録</string>
-    <string name="maker_name_label">メーカー名</string>
-    <string name="category_name_label">カテゴリー名</string>
+    <string name="user_name">%1s %2s</string>
+
+    <!-- 機材 -->
+    <string name="equipment_create">機材 登録</string>
     <string name="management_number_label">管理番号</string>
-    <string name="model_name">モデル名</string>
-    <string name="equipment_type">種別</string>
-    <string name="user_id">使用者</string>
+    <string name="model_name_label">モデル名</string>
+    <string name="equipment_type_label">種別</string>
+    <string name="user_label">使用者</string>
     <string name="usage_label">用途</string>
     <string name="note_label">メモ・備考</string>
-    <string name="equipment_create_button_label">登録</string>
     <string name="purchase_date_label">購入日</string>
-    <string name="create_equipment_button_label2">機材登録</string>
-
     <string name="equipment_management_number_string">%1s-%2s</string>
 
-    <string name="user_name">%1s %2s</string>
+    <string name="create">新規登録</string>
+    <string name="save">保存</string>
+    <string name="delete">削除</string>
+    <string name="update">更新</string>
 </resources>

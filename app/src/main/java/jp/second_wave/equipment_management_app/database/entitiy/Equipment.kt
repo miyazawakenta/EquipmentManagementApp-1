@@ -33,10 +33,3 @@ data class Equipment(
     val note: String?,
     val purchase_date: java.util.Date?
 )
-
-class EquipmentAndUser {
-    @Embedded
-    lateinit var equipment: Equipment
-    @Relation(parentColumn = "user_id", entityColumn = "id")
-    lateinit var user: User
-}

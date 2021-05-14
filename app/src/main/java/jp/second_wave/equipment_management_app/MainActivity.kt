@@ -2,16 +2,14 @@ package jp.second_wave.equipment_management_app
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import jp.second_wave.equipment_management_app.database.adapter.EquipmentListAdapter
+import jp.second_wave.equipment_management_app.adapter.EquipmentListAdapter
 import jp.second_wave.equipment_management_app.database.view_model.EquipmentViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,14 +31,8 @@ class MainActivity : AppCompatActivity() {
         val equipmentViewModel: EquipmentViewModel by viewModels()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val equipments = equipmentViewModel.getEquipmentAndUserAll()
+            val equipments = equipmentViewModel.getEquipmentAndRelationAll()
             val adapter = EquipmentListAdapter(applicationContext, equipments)
-//            val data = ArrayList<String>()
-//            equipments.forEach {
-//                data.add(it.modelName)
-//            }
-//
-//            val adapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, data)
             val listView: ListView = findViewById(R.id.equipment_list)
             listView.adapter = adapter
         }
