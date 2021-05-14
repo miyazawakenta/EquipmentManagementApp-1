@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import jp.second_wave.equipment_management_app.database.view_model.EquipmentViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
 import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
+import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,9 +26,26 @@ class EquipmentActivity : AppCompatActivity() {
         setManagementNumber()
         setMakerSpinner()
         setPurchaseDateCalender()
+        setUserSpinner()
 
         val button: Button = findViewById<View>(R.id.equipment_create_button) as Button
         button.setOnClickListener { createEquipment() }
+    }
+
+    private fun setUserSpinner() {
+        val spinner = findViewById<Spinner>(R.id.user_spinner)
+        val userViewModel: UserViewModel by viewModels()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val users = userViewModel.getAll()
+            val userIds = ArrayList<String>()
+            users.forEach {
+                userIds.add(it.id.toString())
+            }
+
+            val adapter = ArrayAdapter(this@EquipmentActivity, android.R.layout.simple_spinner_item , userIds)
+            spinner.adapter = adapter
+        }
     }
 
     private fun setPurchaseDateCalender() {
@@ -70,7 +88,7 @@ class EquipmentActivity : AppCompatActivity() {
         val makerSpinner = findViewById<View>(R.id.maker_spinner) as Spinner
         val modelName = findViewById<View>(R.id.model_name) as EditText
         val equipmentType = findViewById<View>(R.id.equipment_type) as EditText
-        val userId = findViewById<View>(R.id.user_id) as EditText
+        val userSpinner = findViewById<View>(R.id.user_spinner) as Spinner
         val usage = findViewById<View>(R.id.usage) as EditText
         val note = findViewById<View>(R.id.note) as EditText
         val purchaseDate = findViewById<View>(R.id.purchase_date) as EditText
@@ -85,7 +103,7 @@ class EquipmentActivity : AppCompatActivity() {
                 Integer.parseInt(makerSpinner.selectedItem.toString()), // TODO: 内部データを保持して取得したい
                 modelName.text.toString(),
                 equipmentType.text.toString(),
-                Integer.parseInt(userId.text.toString()),
+                Integer.parseInt(userSpinner.selectedItem.toString()),
                 usage.text.toString(),
                 note.text.toString(),
                 java.util.Date()
