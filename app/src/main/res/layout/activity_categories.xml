@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoriesActivity">
+    tools:context=".CategoryActivity">
 
     <Button
-        android:id="@+id/start_category"
-        android:layout_width="match_parent"
+        android:id="@+id/to_create_category_page"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"
         android:paddingTop="5dp"

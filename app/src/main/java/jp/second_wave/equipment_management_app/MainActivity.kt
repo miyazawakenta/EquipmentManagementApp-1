@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startCreateEquipment() {
-        val intent = Intent(this, CategoriesActivity::class.java)
+        val intent = Intent(this, CategoryActivity::class.java)
         startActivity(intent)
     }
 
@@ -59,23 +59,23 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_equipment_list -> {
+            R.id.menu_equipment_list -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 return true
             }
-            R.id.action_maker_list -> {
-                val intent = Intent(this, MakersActivity::class.java)
+            R.id.menu_maker_list -> {
+                val intent = Intent(this, MakerActivity::class.java)
                 startActivity(intent)
                 return true
             }
-            R.id.action_new -> {
-                val intent = Intent(this, CategoriesActivity::class.java)
+            R.id.menu_new_equipment -> {
+                val intent = Intent(this, CategoryActivity::class.java)
                 startActivity(intent)
                 return true
             }
-            R.id.action_user_list -> {
-                val intent = Intent(this, UsersActivity::class.java)
+            R.id.menu_user_list -> {
+                val intent = Intent(this, UserActivity::class.java)
                 startActivity(intent)
                 return true
             }

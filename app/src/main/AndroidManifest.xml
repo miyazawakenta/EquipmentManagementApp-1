@@ -15,21 +15,12 @@
             android:label="機材登録" />
         <activity
             android:name=".CategoryActivity"
-            android:label="カテゴリー登録" />
-        <activity
-            android:name=".CategoriesActivity"
-            android:label="カテゴリー選択" />
-        <activity
-            android:name=".MakersActivity"
-            android:label="メーカー一覧" />
+            android:label="カテゴリー一覧" />
         <activity
             android:name=".MakerActivity"
-            android:label="メーカー登録" />
+            android:label="メーカー一覧" />
         <activity
             android:name=".UserActivity"
-            android:label="使用者登録" />
-        <activity
-            android:name=".UsersActivity"
             android:label="使用者一覧" />
         <activity
             android:name=".MainActivity"

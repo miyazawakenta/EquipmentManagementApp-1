@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">機材管理</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="action_equipment_list">機材一覧</string>
-    <string name="action_new">新規登録</string>
-    <string name="action_maker_list">メーカー一覧</string>
-    <string name="action_user_list">使用者一覧</string>
+
+    <!-- メニュー -->
+    <string name="menu_equipment_list">機材一覧</string>
+    <string name="menu_maker_list">メーカー一覧</string>
+    <string name="menu_new_equipment">新規登録</string>
+    <string name="menu_user_list">使用者一覧</string>
+
+    <!-- メーカー一覧 -->
+
+
     <string name="email_label">メールアドレス</string>
     <string name="last_name_label">名前（姓）</string>
     <string name="first_name_label">名前（名）</string>
