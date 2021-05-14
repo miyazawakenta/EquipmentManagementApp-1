@@ -40,7 +40,8 @@ class EquipmentActivity : AppCompatActivity() {
             val users = userViewModel.getAll()
             val userIds = ArrayList<String>()
             users.forEach {
-                userIds.add(it.id.toString())
+                val replaceId = String.format("%3s", it.id.toString()).replace(" ", "0")
+                userIds.add("${replaceId}: ${it.firstName}")
             }
 
             val adapter = ArrayAdapter(this@EquipmentActivity, android.R.layout.simple_spinner_item , userIds)
@@ -57,7 +58,7 @@ class EquipmentActivity : AppCompatActivity() {
         val managementNumber = findViewById<View>(R.id.management_number) as TextView
         val equipmentViewModel: EquipmentViewModel by viewModels()
 
-        GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.IO) {
             val maxManagementNumber = equipmentViewModel.getMaxManagementNumber(categoryId) + 1
             val managementNumberString = String.format("%3s", maxManagementNumber.toString()).replace(" ", "0")
             managementNumber.text = managementNumberString
@@ -74,7 +75,8 @@ class EquipmentActivity : AppCompatActivity() {
             val makers = makerViewModel.getAll()
             val makerIds = ArrayList<String>()
             makers.forEach {
-                makerIds.add(it.id.toString())
+                val replaceId = String.format("%3s", it.id.toString()).replace(" ", "0")
+                makerIds.add("${replaceId}: ${it.makerName}")
             }
 
             val adapter = ArrayAdapter(this@EquipmentActivity, android.R.layout.simple_spinner_item , makerIds)
@@ -96,14 +98,16 @@ class EquipmentActivity : AppCompatActivity() {
         if (modelName.text.toString().isEmpty()) {
             modelName.error = "文字を入力してください"
         } else {
+            val userIdString = userSpinner.selectedItem.toString().split(":")[0]
+            val makerIdString = makerSpinner.selectedItem.toString().split(":")[0]
             val equipment = Equipment(
                 0,
                 Integer.parseInt(managementNumber.text.toString()),
                 categoryId,
-                Integer.parseInt(makerSpinner.selectedItem.toString()), // TODO: 内部データを保持して取得したい
+                Integer.parseInt(makerIdString),
                 modelName.text.toString(),
                 equipmentType.text.toString(),
-                Integer.parseInt(userSpinner.selectedItem.toString()),
+                Integer.parseInt(userIdString),
                 usage.text.toString(),
                 note.text.toString(),
                 java.util.Date()
