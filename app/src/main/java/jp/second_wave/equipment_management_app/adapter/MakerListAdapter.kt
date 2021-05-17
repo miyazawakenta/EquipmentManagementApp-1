@@ -26,9 +26,9 @@ class MakerListAdapter(context: Context, private val makers: List<Maker>) : Base
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false)
+        val view = layoutInflater.inflate(R.layout.list, parent, false)
         val maker = makers[position]
-        val categoryLabel = view.findViewById<TextView>(android.R.id.text1)
+        val categoryLabel = view.findViewById<TextView>(R.id.list_name)
         categoryLabel.text = maker.makerName
         return view
     }

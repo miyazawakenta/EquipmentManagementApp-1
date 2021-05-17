@@ -41,5 +41,6 @@
     <string name="create">新規登録</string>
     <string name="save">保存</string>
     <string name="delete">削除</string>
+    <string name="delete_2">×</string>
     <string name="update">更新</string>
 </resources>
