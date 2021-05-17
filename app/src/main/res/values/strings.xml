@@ -27,7 +27,8 @@
     <string name="user_name">%1s %2s</string>
 
     <!-- 機材 -->
-    <string name="equipment_create">機材 登録</string>
+    <string name="equipment_create">機材 新規登録</string>
+    <string name="equipment_update">機材 更新</string>
     <string name="management_number_label">管理番号</string>
     <string name="model_name_label">モデル名</string>
     <string name="equipment_type_label">種別</string>

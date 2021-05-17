@@ -161,15 +161,16 @@
                 android:labelFor="@id/purchase_date"
                 android:text="@string/purchase_date_label" />
 
-            <EditText
-                android:id="@+id/purchase_date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:focusable="false"
-                android:inputType="date"
-                android:autofillHints="" />
+                <EditText
+                    android:id="@+id/purchase_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:inputType="text"
+                    android:autofillHints=""
+                    />
         </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
