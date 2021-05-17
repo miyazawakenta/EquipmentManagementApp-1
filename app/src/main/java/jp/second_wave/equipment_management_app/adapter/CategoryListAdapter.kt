@@ -26,9 +26,9 @@ class CategoryListAdapter(context: Context, private val categories: List<Categor
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = layoutInflater.inflate(R.layout.category, parent, false)
+        val view = layoutInflater.inflate(R.layout.list, parent, false)
         val category = categories[position]
-        val categoryLabel = view.findViewById<TextView>(R.id.category_name)
+        val categoryLabel = view.findViewById<TextView>(R.id.list_name)
         categoryLabel.text = category.CategoryName
         return view
     }
