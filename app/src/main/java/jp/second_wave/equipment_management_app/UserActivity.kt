@@ -49,6 +49,7 @@ class UserActivity : AppCompatActivity() {
         title = getString(R.string.menu_user_list)
 
         setUserList()
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         val button: Button = findViewById<View>(R.id.to_create_user_page) as Button
         button.setOnClickListener { setToCreateUserPage() }
@@ -56,7 +57,8 @@ class UserActivity : AppCompatActivity() {
 
     private fun setToUpdateUserPage(user: User) {
         setContentView(R.layout.activity_user)
-        title = getString(R.string.update)
+        title = getString(R.string.user_update)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val lastName = findViewById<View>(R.id.last_name) as EditText
         val firstName = findViewById<View>(R.id.first_name) as EditText
@@ -72,6 +74,7 @@ class UserActivity : AppCompatActivity() {
     private fun setToCreateUserPage() {
         setContentView(R.layout.activity_user)
         title = getString(R.string.user_create)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val button: Button = findViewById<View>(R.id.create_user_button) as Button
         button.setOnClickListener { createUser() }
@@ -89,7 +92,7 @@ class UserActivity : AppCompatActivity() {
         val email = findViewById<View>(R.id.email) as EditText
 
         if (lastName.text.toString().isEmpty()) {
-            lastName.error = "文字を入力してください"
+            lastName.error = "名前（姓）を入力してください"
         } else {
             user.lastName = lastName.text.toString()
             user.firstName = firstName.text.toString()
@@ -113,7 +116,7 @@ class UserActivity : AppCompatActivity() {
         val email = findViewById<View>(R.id.email) as EditText
 
         if (lastName.text.toString().isEmpty()) {
-            lastName.error = "文字を入力してください"
+            lastName.error = "名前（姓）を入力してください"
         } else {
             val user = User(
                 0,
@@ -131,6 +134,12 @@ class UserActivity : AppCompatActivity() {
 
             setToUserListPage()
         }
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        setToUserListPage()
+        return false
     }
 
 }

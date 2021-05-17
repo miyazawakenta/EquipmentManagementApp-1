@@ -20,6 +20,7 @@
 
     <!-- 使用者 -->
     <string name="user_create">使用者 新規登録</string>
+    <string name="user_update">使用者 更新</string>
     <string name="email_label">メールアドレス</string>
     <string name="last_name_label">名前（姓）</string>
     <string name="first_name_label">名前（名）</string>
