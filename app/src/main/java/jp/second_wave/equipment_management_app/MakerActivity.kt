@@ -1,9 +1,6 @@
 package jp.second_wave.equipment_management_app
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
@@ -25,8 +22,6 @@ class MakerActivity : AppCompatActivity() {
 
         val button: Button = findViewById<View>(R.id.to_create_maker_page) as Button
         button.setOnClickListener { setToCreateMakerPage() }
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // 一覧データをセットする
@@ -56,6 +51,7 @@ class MakerActivity : AppCompatActivity() {
         title = getString(R.string.menu_maker_list)
 
         setMakerList()
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         val button: Button = findViewById<View>(R.id.to_create_maker_page) as Button
         button.setOnClickListener { setToCreateMakerPage() }
@@ -65,6 +61,7 @@ class MakerActivity : AppCompatActivity() {
     private fun setToUpdateMakerPage(maker: Maker) {
         setContentView(R.layout.activity_maker)
         title = getString(R.string.maker_update)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val makerName = findViewById<View>(R.id.maker_name) as EditText
         makerName.setText(maker.makerName)
@@ -76,7 +73,8 @@ class MakerActivity : AppCompatActivity() {
     // 新規登録画面へ切り替える
     private fun setToCreateMakerPage() {
         setContentView(R.layout.activity_maker)
-        title = getString(R.string.create)
+        title = getString(R.string.maker_create)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val button: Button = findViewById<View>(R.id.create_maker_button) as Button
         button.setOnClickListener { createMaker() }
@@ -112,7 +110,7 @@ class MakerActivity : AppCompatActivity() {
         val makerName = findViewById<View>(R.id.maker_name) as EditText
 
         if (makerName.text.toString().isEmpty()) {
-            makerName.error = "文字を入力してください"
+            makerName.error = "メーカー名を入力してください"
         } else {
             val maker = Maker(
                 0,
@@ -129,45 +127,9 @@ class MakerActivity : AppCompatActivity() {
         }
     }
 
-    // メニュー表示
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    // メニュークリックアクション
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_equipment_list -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.menu_maker_list -> {
-                val intent = Intent(this, MakerActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.menu_new_equipment -> {
-                val intent = Intent(this, CategoryActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            R.id.menu_user_list -> {
-                val intent = Intent(this, UserActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-//            R.id.home -> {
-//                val intent = Intent(this, MakerActivity::class.java)
-//                startActivity(intent)
-//                return true
-//            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
     override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
+//        finish()
+        setToMakerListPage()
+        return false // super.onSupportNavigateUp()
     }
 }

@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MakerActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="jp.second_wave.equipment_management_app.MenuFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/to_create_maker_page"
         android:layout_width="100dp"
