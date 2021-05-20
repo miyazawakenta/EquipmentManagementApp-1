@@ -30,7 +30,7 @@ class MakerActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val makers = makerViewModel.getAll()
-            val adapter = MakerListAdapter(this@MakerActivity, makers)
+            val adapter = MakerListAdapter(this@MakerActivity, makers, supportFragmentManager)
             val listView: ListView = findViewById(R.id.maker_list)
             listView.adapter = adapter
             listView.onItemClickListener = ListItemClickListener()
@@ -83,6 +83,14 @@ class MakerActivity : AppCompatActivity() {
     // 削除アクション
     private fun deleteMaker(maker: Maker) {
         // TODO: 削除処理
+        val makerViewModel: MakerViewModel by viewModels()
+        GlobalScope.launch(Dispatchers.IO) {
+            makerViewModel.delete(maker)
+        }
+        val toast: Toast = Toast.makeText(this, "削除しました", Toast.LENGTH_SHORT)
+        toast.show()
+
+        setToMakerListPage()
     }
 
     // 更新アクション

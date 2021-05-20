@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import jp.second_wave.equipment_management_app.UserDeleteModalFragment
+import jp.second_wave.equipment_management_app.R
 import jp.second_wave.equipment_management_app.database.entitiy.User
 
-class UserListAdapter(context: Context, private val users: List<User>) : BaseAdapter() {
+class UserListAdapter(private val context: Context, private val users: List<User>, private val Fragment: FragmentManager) : BaseAdapter() {
+
+    class ViewHolder(val nameView: TextView, val deleteView: TextView)
 
     private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -25,14 +30,35 @@ class UserListAdapter(context: Context, private val users: List<User>) : BaseAda
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = layoutInflater.inflate(android.R.layout.simple_list_item_1, parent, false)
-        val user = users[position]
-        val textView = view.findViewById<TextView>(android.R.id.text1)
-        if (user.email?.isNotEmpty()!!) {
-            textView.text = "${user.lastName}${user.firstName} (${user.email})"
+        var viewHolder : MakerListAdapter.ViewHolder? = null
+        var view = convertView
+
+        // 再利用の設定
+        if (view == null) {
+
+            view = layoutInflater.inflate(R.layout.user_list, parent, false)
+
+            viewHolder = MakerListAdapter.ViewHolder(
+                view.findViewById(R.id.user_name),
+                view.findViewById(R.id.delete_button)
+            )
+            view.tag = viewHolder
         } else {
-            textView.text = "${user.lastName}${user.firstName}"
+            viewHolder = view.tag as MakerListAdapter.ViewHolder
         }
-        return view
+
+        // 項目の情報を設定
+        val user = users[position]
+        if (user.email?.isNotEmpty()!!) {
+            viewHolder.nameView.text = "${user.lastName}${user.firstName} (${user.email})"
+        } else {
+            viewHolder.nameView.text = "${user.lastName}${user.firstName}"
+        }
+
+        viewHolder.deleteView.setOnClickListener { _ ->
+            val dialog = UserDeleteModalFragment(user)
+            dialog.show(Fragment, "simple")
+        }
+        return view!!
     }
 }

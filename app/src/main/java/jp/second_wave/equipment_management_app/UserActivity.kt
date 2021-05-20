@@ -29,7 +29,7 @@ class UserActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main){
             val users = userViewModel.getAll()
-            val adapter = UserListAdapter(this@UserActivity, users)
+            val adapter = UserListAdapter(this@UserActivity, users, supportFragmentManager)
             val listView: ListView = findViewById(R.id.user_list)
             listView.adapter = adapter
             listView.onItemClickListener = ListItemClickListener()
