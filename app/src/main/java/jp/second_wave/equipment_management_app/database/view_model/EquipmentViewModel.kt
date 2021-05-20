@@ -37,9 +37,19 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    suspend fun getEquipmentAndRelationAll() :List<EquipmentAndRelation> {
+    suspend fun getEquipmentAndRelationAll(
+        categoryIds: List<Int> = arrayListOf(),
+        userIds: List<Int> = arrayListOf(),
+        modelName: String = ""
+    ) :List<EquipmentAndRelation> {
+
         return withContext(Dispatchers.IO) {
-            dao.getEquipmentAndRelationAll()
+            dao.getEquipmentAndRelationAll().filter {
+                val category = if (categoryIds.isEmpty()) true else categoryIds.contains(it.category.id)
+                val user = if (userIds.isEmpty()) true else userIds.contains(it.user.id)
+                val model = if (modelName == "") true else Regex(modelName).containsMatchIn(it.equipment.modelName)
+                category && user && model
+            }
         }
     }
 

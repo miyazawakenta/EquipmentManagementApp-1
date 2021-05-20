@@ -26,22 +26,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
                 android:gravity="center"
+                android:layout_height="50dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="カテゴリー" />
+                    android:text="@string/category" />
 
-                <Spinner
-                    android:id="@+id/search_category_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="text"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/category_dialog_button"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -54,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="モデル名" />
+                    android:text="@string/model_name_label" />
 
                 <EditText
                     android:id="@+id/search_model_name"
@@ -74,16 +77,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="使用者" />
+                    android:text="@string/user" />
 
-                <EditText
-                    android:id="@+id/search_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="text"
-                    android:text="" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/user_dialog_button"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -93,10 +99,10 @@
 
                 <Button
                     android:id="@+id/search_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="検索" />
+                    android:text="@string/search" />
 
             </LinearLayout>
 
