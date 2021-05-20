@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 class MakerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class MakerActivity : AppCompatActivity() {
 
         GlobalScope.launch(Dispatchers.Main) {
             val makers = makerViewModel.getAll()
-            val adapter = MakerListAdapter(this@MakerActivity, makers)
+            val adapter = MakerListAdapter(this@MakerActivity, makers, supportFragmentManager)
             val listView: ListView = findViewById(R.id.maker_list)
             listView.adapter = adapter
             listView.onItemClickListener = ListItemClickListener()
@@ -40,9 +41,7 @@ class MakerActivity : AppCompatActivity() {
         override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
             val maker = parent.getItemAtPosition(position) as Maker
 
-            val dialog = DeleteModalFragment()
-            dialog.show(supportFragmentManager, "simple")
-//            deleteMaker(maker)
+            setToUpdateMakerPage(maker)
         }
     }
 

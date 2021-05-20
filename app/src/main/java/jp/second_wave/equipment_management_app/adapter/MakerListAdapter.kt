@@ -8,10 +8,14 @@ import android.widget.*
 import jp.second_wave.equipment_management_app.R
 import jp.second_wave.equipment_management_app.database.entitiy.Maker
 import android.widget.Toast
+import jp.second_wave.equipment_management_app.DeleteModalFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 
 data class ViewHolder(val nameView: TextView, val deleteView: TextView)
 
-class MakerListAdapter(private val context: Context, private val makers: List<Maker>) : BaseAdapter() {
+class MakerListAdapter(private val context: Context, private val makers: List<Maker>, private val Fragment: FragmentManager) : BaseAdapter() {
 
     private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -50,9 +54,9 @@ class MakerListAdapter(private val context: Context, private val makers: List<Ma
         val makeName = maker.makerName
         viewHolder.nameView.text = makeName
         viewHolder.deleteView.setOnClickListener { _ ->
-            Toast.makeText(context, "$makeName を削除したい", Toast.LENGTH_SHORT).show()
+            val dialog = DeleteModalFragment(maker)
+            dialog.show(Fragment, "simple")
         }
-
         return view!!
     }
 }
