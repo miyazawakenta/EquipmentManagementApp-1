@@ -30,4 +30,8 @@ class MakerViewModel(application: Application) : AndroidViewModel(application) {
     fun update(maker: Maker) {
         viewModelScope.launch(Dispatchers.IO) { dao.update(maker) }
     }
+
+    fun delete(maker: Maker) {
+        viewModelScope.launch(Dispatchers.IO) { dao.delete(maker) }
+    }
 }

@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class MakerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +40,9 @@ class MakerActivity : AppCompatActivity() {
         override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
             val maker = parent.getItemAtPosition(position) as Maker
 
-            setToUpdateMakerPage(maker)
+            val dialog = DeleteModalFragment()
+            dialog.show(supportFragmentManager, "simple")
+//            deleteMaker(maker)
         }
     }
 
@@ -83,6 +84,14 @@ class MakerActivity : AppCompatActivity() {
     // 削除アクション
     private fun deleteMaker(maker: Maker) {
         // TODO: 削除処理
+        val makerViewModel: MakerViewModel by viewModels()
+        GlobalScope.launch(Dispatchers.IO) {
+            makerViewModel.delete(maker)
+        }
+        val toast: Toast = Toast.makeText(this, "削除しました", Toast.LENGTH_SHORT)
+        toast.show()
+
+        setToMakerListPage()
     }
 
     // 更新アクション

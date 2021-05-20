@@ -4,12 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
+import android.widget.*
 import jp.second_wave.equipment_management_app.R
 import jp.second_wave.equipment_management_app.database.entitiy.Maker
+import android.widget.Toast
 
-class MakerListAdapter(context: Context, private val makers: List<Maker>) : BaseAdapter() {
+data class ViewHolder(val nameView: TextView, val deleteView: TextView)
+
+class MakerListAdapter(private val context: Context, private val makers: List<Maker>) : BaseAdapter() {
 
     private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -26,10 +28,31 @@ class MakerListAdapter(context: Context, private val makers: List<Maker>) : Base
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view = layoutInflater.inflate(R.layout.list, parent, false)
+        var viewHolder : ViewHolder? = null
+        var view = convertView
+
+        // 再利用の設定
+        if (view == null) {
+
+            view = layoutInflater.inflate(R.layout.list, parent, false)
+
+            viewHolder = ViewHolder(
+                view.findViewById(R.id.list_name),
+                view.findViewById(R.id.delete_button)
+            )
+            view.tag = viewHolder
+        } else {
+            viewHolder = view.tag as ViewHolder
+        }
+
+        // 項目の情報を設定
         val maker = makers[position]
-        val categoryLabel = view.findViewById<TextView>(R.id.list_name)
-        categoryLabel.text = maker.makerName
-        return view
+        val makeName = maker.makerName
+        viewHolder.nameView.text = makeName
+        viewHolder.deleteView.setOnClickListener { _ ->
+            Toast.makeText(context, "$makeName を削除したい", Toast.LENGTH_SHORT).show()
+        }
+
+        return view!!
     }
 }
