@@ -36,4 +36,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             dao.update(user)
         }
     }
+
+    fun delete(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dao.delete(user)
+        }
+    }
 }

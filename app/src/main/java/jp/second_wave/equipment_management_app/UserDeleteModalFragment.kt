@@ -7,13 +7,13 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import jp.second_wave.equipment_management_app.database.entitiy.Maker
-import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
+import jp.second_wave.equipment_management_app.database.entitiy.User
+import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DeleteModalFragment(private val maker: Maker): DialogFragment() {
+class UserDeleteModalFragment(private val user: User): DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
@@ -28,13 +28,13 @@ class DeleteModalFragment(private val maker: Maker): DialogFragment() {
                 val toast: Toast = Toast.makeText(context, messageDelete, Toast.LENGTH_SHORT)
                 toast.show()
 
-                val makerViewModel: MakerViewModel by viewModels()
+                val makerViewModel: UserViewModel by viewModels()
 
                 GlobalScope.launch(Dispatchers.IO) {
-                    makerViewModel.delete(maker)
+                    makerViewModel.delete(user)
                 }
 
-                val intent = Intent(activity, MakerActivity::class.java)
+                val intent = Intent(activity, UserActivity::class.java)
                 startActivity(intent)
             }
             .setNegativeButton(cancel) { dialog, id ->
