@@ -12,22 +12,115 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@drawable/border"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/category" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/category_dialog_button"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/model_name_label" />
+
+                <EditText
+                    android:id="@+id/search_model_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:text="" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/user_dialog_button"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/select" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/search_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:layout_marginTop="20dp"
+            android:gravity="end"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/create_equipment_button"
-                android:layout_width="100dp"
-                android:layout_gravity="end"
-                android:layout_height="wrap_content"
-                android:text="@string/create" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/equipment_create" />
         </LinearLayout>
 
         <LinearLayout

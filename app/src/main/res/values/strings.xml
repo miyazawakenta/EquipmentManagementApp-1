@@ -17,6 +17,7 @@
     <!-- カテゴリー -->
     <string name="category_create">カテゴリー 新規登録</string>
     <string name="category_name_label">カテゴリー名</string>
+    <string name="category">カテゴリー</string>
 
     <!-- 使用者 -->
     <string name="user_create">使用者 新規登録</string>
@@ -25,6 +26,7 @@
     <string name="last_name_label">名前（姓）</string>
     <string name="first_name_label">名前（名）</string>
     <string name="user_name">%1s %2s</string>
+    <string name="user">使用者</string>
 
     <!-- 機材 -->
     <string name="equipment_create">機材 新規登録</string>
@@ -43,4 +45,8 @@
     <string name="delete">削除</string>
     <string name="delete_2">×</string>
     <string name="update">更新</string>
+    <string name="select">選択</string>
+    <string name="search">検索</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
