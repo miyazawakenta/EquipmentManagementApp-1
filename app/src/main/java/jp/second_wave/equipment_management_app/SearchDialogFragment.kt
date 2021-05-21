@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 class SearchDialogFragment(private val items: Map<Int, String>) : DialogFragment() {
 
     var result = ArrayList<Int>()
+    var resultLabel = ArrayList<String>()
     private lateinit var listener: ParentFragmentListener
 
     interface ParentFragmentListener {
@@ -34,8 +35,10 @@ class SearchDialogFragment(private val items: Map<Int, String>) : DialogFragment
                 checkedItems.forEachIndexed { index, b ->
                     if (b) {
                         result.add(index + 1)
+                        items[index + 1]?.let { resultLabel.add(it) }
                     } else {
                         result.remove(index + 1)
+                        resultLabel.remove(items[index + 1])
                     }
                 }
                 listener.onClickButton()

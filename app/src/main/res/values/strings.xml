@@ -13,6 +13,7 @@
     <string name="maker_create">メーカー 新規登録</string>
     <string name="maker_update">メーカー 更新</string>
     <string name="maker_name_label">メーカー名</string>
+    <string name="maker">メーカー</string>
 
     <!-- カテゴリー -->
     <string name="category_create">カテゴリー 新規登録</string>
