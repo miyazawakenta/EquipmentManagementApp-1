@@ -256,7 +256,8 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
                 user.id,
                 usage.text.toString(),
                 note.text.toString(),
-                purchaseDate
+                purchaseDate,
+                ""
             )
             GlobalScope.launch(Dispatchers.IO) {
                 equipmentViewModel.insert(equipment)

@@ -34,5 +34,6 @@ data class Equipment(
     @ColumnInfo(name = "user_id") var userId: Int?,
     var usage: String?,
     var note: String?,
-    var purchase_date: java.util.Date?
+    var purchase_date: java.util.Date?,
+    var os: String?
 )
