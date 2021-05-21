@@ -13,7 +13,7 @@ interface EquipmentDao {
     fun findById(id: Int): Equipment
 
     @Insert
-    fun insert(equipment : Equipment)
+    fun insert(equipment : Equipment) : Long
 
     @Update
     fun update(equipment: Equipment)

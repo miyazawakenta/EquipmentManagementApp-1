@@ -8,13 +8,8 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import jp.second_wave.equipment_management_app.database.entitiy.Equipment
-import jp.second_wave.equipment_management_app.database.entitiy.Maker
-import jp.second_wave.equipment_management_app.database.entitiy.User
-import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
-import jp.second_wave.equipment_management_app.database.view_model.EquipmentViewModel
-import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
-import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
+import jp.second_wave.equipment_management_app.database.entitiy.*
+import jp.second_wave.equipment_management_app.database.view_model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -34,6 +29,8 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
     private val userViewModel: UserViewModel by viewModels()
     private val makerViewModel: MakerViewModel by viewModels()
     private val categoryViewModel: CategoryViewModel by viewModels()
+    private val equipmentRelationShipViewModel: EquipmentRelationShipViewModel by viewModels()
+    private val macAddressViewModel: MacAddressViewModel by viewModels()
 
     private lateinit var macAddressEditText: EditText
 
@@ -98,7 +95,7 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
 
 
         GlobalScope.launch(Dispatchers.Main) {
-            var equipments = mutableMapOf<Int, String>()
+            val equipments = mutableMapOf<Int, String>()
              equipmentViewModel.getAll().filter { it.id != equipmentId }.forEach { equipment ->
                  equipments[equipment.id] = equipment.modelName
              }
@@ -120,6 +117,7 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
         }
         managementNumber.isFocusable = false
     }
+
     private fun setCategory(id : Int) {
         val categoryNameLabel = findViewById<TextView>(R.id.category_name_label)
         GlobalScope.launch(Dispatchers.Main) {
@@ -219,14 +217,17 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
 
     private fun createEquipment() {
 
-        val managementNumber = findViewById<View>(R.id.management_number) as TextView
+        val managementNumberTextView = findViewById<View>(R.id.management_number) as TextView
         val makerSpinner = findViewById<View>(R.id.maker_spinner) as Spinner
-        val modelName = findViewById<View>(R.id.model_name) as EditText
-        val equipmentType = findViewById<View>(R.id.equipment_type) as EditText
+        val modelNameEditText = findViewById<View>(R.id.model_name) as EditText
+        val equipmentTypeEditText = findViewById<View>(R.id.equipment_type) as EditText
         val userSpinner = findViewById<View>(R.id.user_spinner) as Spinner
-        val usage = findViewById<View>(R.id.usage) as EditText
-        val note = findViewById<View>(R.id.note) as EditText
-        val vPurchaseDate = findViewById<View>(R.id.purchase_date) as EditText
+        val usageEditText = findViewById<View>(R.id.usage) as EditText
+        val noteEditText = findViewById<View>(R.id.note) as EditText
+        val purchaseDateEditText = findViewById<View>(R.id.purchase_date) as EditText
+        val hostNameEditText = findViewById<EditText>(R.id.host_name)
+        val osEditText = findViewById<EditText>(R.id.os)
+        val macAddressEditText = findViewById<EditText>(R.id.mac_address)
 
         val sdFormat = try {
             SimpleDateFormat("yyyy/MM/dd")
@@ -236,31 +237,56 @@ class EquipmentActivity : AppCompatActivity(), SearchDialogFragment.ParentFragme
 
         val purchaseDate = sdFormat?.let {
             try {
-                it.parse(vPurchaseDate.text.toString())
+                it.parse(purchaseDateEditText.text.toString())
             } catch (e: ParseException) {
                 java.util.Date()
             }
         }
-        if (modelName.text.toString().isEmpty()) {
-            modelName.error = "モデル名をいれてください"
+        if (modelNameEditText.text.toString().isEmpty()) {
+            modelNameEditText.error = "モデル名をいれてください"
         } else {
             val maker = makers[makerSpinner.selectedItemPosition]
             val user = users[userSpinner.selectedItemPosition]
             val equipment = Equipment(
                 0,
-                Integer.parseInt(managementNumber.text.toString()),
+                Integer.parseInt(managementNumberTextView.text.toString()),
                 categoryId,
                 maker.id,
-                modelName.text.toString(),
-                equipmentType.text.toString(),
+                modelNameEditText.text.toString(),
+                equipmentTypeEditText.text.toString(),
                 user.id,
-                usage.text.toString(),
-                note.text.toString(),
+                usageEditText.text.toString(),
+                noteEditText.text.toString(),
+                hostNameEditText.text.toString(),
                 purchaseDate,
-                ""
+                osEditText.text.toString()
             )
             GlobalScope.launch(Dispatchers.IO) {
-                equipmentViewModel.insert(equipment)
+                val id = equipmentViewModel.insert(equipment)
+                equipment.id = id.toInt()
+                // TODO: IDが取得できずエラーになる?  java.lang.Long cannot be cast to java.lang.Integer
+            }
+            val equipmentRelationShips = selectedEquipmentRelations.map {
+                EquipmentRelationShip(
+                    0,
+                    equipment.id,
+                    it
+                )
+            }
+            GlobalScope.launch(Dispatchers.IO) {
+                equipmentRelationShips.forEach {
+                    equipmentRelationShipViewModel.insert(it)
+                }
+            }
+            if (macAddressEditText.text.toString().isNotEmpty()) {
+                val macAddress = MacAddress(
+                    0,
+                    equipment.id,
+                    macAddressEditText.text.toString()
+                )
+                GlobalScope.launch(Dispatchers.IO) {
+                    macAddressViewModel.insert(macAddress)
+                }
             }
 
             val toast: Toast = Toast.makeText(this, "保存しました", Toast.LENGTH_SHORT)

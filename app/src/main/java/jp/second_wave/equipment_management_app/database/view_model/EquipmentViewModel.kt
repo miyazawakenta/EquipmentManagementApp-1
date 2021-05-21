@@ -58,8 +58,8 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun insert(equipment: Equipment) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun insert(equipment: Equipment) : Long {
+        return withContext(Dispatchers.IO) {
             dao.insert(equipment)
         }
     }

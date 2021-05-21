@@ -141,7 +141,6 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:id="@+id/mac_address_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
@@ -166,7 +165,6 @@
             android:layout_height="0dp">
 
             <TextView
-                android:id="@+id/host_name_label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
