@@ -47,7 +47,7 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
             dao.getEquipmentAndRelationAll().filter {
                 val category = if (categoryIds.isEmpty()) true else categoryIds.contains(it.category.id)
                 val user = if (userIds.isEmpty()) true else userIds.contains(it.user.id)
-                val model = if (modelName == "") true else Regex(modelName).containsMatchIn(it.equipment.modelName)
+                val model = if (modelName == "") true else Regex(modelName.toLowerCase()).containsMatchIn(it.equipment.modelName.toLowerCase())
                 category && user && model
             }
         }
