@@ -1,16 +1,16 @@
 package jp.second_wave.equipment_management_app
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import jp.second_wave.equipment_management_app.adapter.CategoryListAdapter
-import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
 import jp.second_wave.equipment_management_app.database.entitiy.Category
+import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class CategoryActivity : AppCompatActivity() {
 
         setCategoryList()
 
-        val button: Button = findViewById<View>(R.id.to_create_category_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_category_page)
         button.setOnClickListener { setToCreateCategoryPage() }
 
     }
@@ -63,7 +63,7 @@ class CategoryActivity : AppCompatActivity() {
 
         setCategoryList()
 
-        val button: Button = findViewById<View>(R.id.to_create_category_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_category_page)
         button.setOnClickListener { setToCreateCategoryPage() }
 
     }

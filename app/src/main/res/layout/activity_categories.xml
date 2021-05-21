@@ -6,23 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".CategoryActivity">
 
-    <Button
-        android:id="@+id/to_create_category_page"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="5dp"
-        android:text="@string/create"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/category_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="20dp"
+                android:gravity="end"
+                android:orientation="horizontal">
 
+                    <ImageButton
+                        android:id="@+id/to_create_category_page"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@null"
+                        android:src="@android:drawable/ic_menu_add" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/category_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent" >
+            </ListView>
+
+        </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

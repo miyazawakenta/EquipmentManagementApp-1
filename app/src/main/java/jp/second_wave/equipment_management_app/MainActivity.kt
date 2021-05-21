@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
         setEquipmentList()
         setSearchOptions()
 
-        val createEquipmentButton = findViewById<Button>(R.id.create_equipment_button)
+        val createEquipmentButton = findViewById<ImageButton>(R.id.create_equipment_button)
         createEquipmentButton.setOnClickListener { startCreateEquipment() }
 
         val searchButton = findViewById<Button>(R.id.search_button)
