@@ -20,7 +20,7 @@ class UserActivity : AppCompatActivity() {
 
         setUserList()
 
-        val button: Button = findViewById<View>(R.id.to_create_user_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_user_page)
         button.setOnClickListener { setToCreateUserPage() }
     }
 
@@ -51,7 +51,7 @@ class UserActivity : AppCompatActivity() {
         setUserList()
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-        val button: Button = findViewById<View>(R.id.to_create_user_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_user_page)
         button.setOnClickListener { setToCreateUserPage() }
     }
 
