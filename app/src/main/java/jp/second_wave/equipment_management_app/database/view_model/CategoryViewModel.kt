@@ -17,6 +17,12 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
         val db = AppDatabase.buildDatabase(application)
         dao = db.categoryDao()
     }
+
+    suspend fun findById(id : Int) : Category {
+        return withContext(Dispatchers.IO) {
+            dao.findById(id)
+        }
+    }
     suspend fun getAll() : List<Category> {
         return withContext(Dispatchers.IO) {
             dao.getAll()

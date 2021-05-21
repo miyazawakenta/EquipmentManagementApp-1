@@ -82,22 +82,25 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
         val makerViewModel: MakerViewModel by viewModels()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val categories = categoryViewModel.getAll()
-            categorySearchDialogFragment = SearchDialogFragment(categories.map { it.id to it.CategoryName }.toMap())
+            val categories = mutableMapOf<Int, String>()
+            categoryViewModel.getAll().forEach { category -> categories[category.id] = category.CategoryName }
+            categorySearchDialogFragment = SearchDialogFragment(categories)
             val categoryDialogButton = findViewById<Button>(R.id.category_dialog_button)
             categoryDialogButton.setOnClickListener {
                 categorySearchDialogFragment.show(supportFragmentManager, "simple")
             }
 
-            val users = userViewModel.getAll()
-            userSearchDialogFragment = SearchDialogFragment(users.map { it.id to it.lastName }.toMap())
+            val users = mutableMapOf<Int, String>()
+            userViewModel.getAll().forEach { user ->  users[user.id] = user.lastName }
+            userSearchDialogFragment = SearchDialogFragment(users)
             val userDialogButton = findViewById<Button>(R.id.user_dialog_button)
             userDialogButton.setOnClickListener {
                 userSearchDialogFragment.show(supportFragmentManager, "simple")
             }
 
-            val makers = makerViewModel.getAll()
-            makerSearchDialogFragment = SearchDialogFragment(makers.map {it.id to it.makerName }.toMap())
+            val makers = mutableMapOf<Int, String>()
+            makerViewModel.getAll().forEach { maker ->  makers[maker.id] = maker.makerName }
+            makerSearchDialogFragment = SearchDialogFragment(makers)
             val makerDialogButton = findViewById<Button>(R.id.maker_dialog_button)
             makerDialogButton.setOnClickListener {
                 makerSearchDialogFragment.show(supportFragmentManager, "simple")
@@ -160,7 +163,7 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             if (before == 0) {
                 if (pattern.matcher(s).matches()) {
-                    searchManagementNumberEditText.setText("${s}-")
+                    searchManagementNumberEditText.setText(resources.getString(R.string.with_hyphen, s))
                     searchManagementNumberEditText.setSelection(searchManagementNumberEditText.editableText.toString().length)
                 }
             } else {

@@ -20,7 +20,7 @@ class MakerActivity : AppCompatActivity() {
 
         setMakerList()
 
-        val button: Button = findViewById<View>(R.id.to_create_maker_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_maker_page)
         button.setOnClickListener { setToCreateMakerPage() }
     }
 
@@ -53,7 +53,7 @@ class MakerActivity : AppCompatActivity() {
         setMakerList()
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-        val button: Button = findViewById<View>(R.id.to_create_maker_page) as Button
+        val button = findViewById<ImageButton>(R.id.to_create_maker_page)
         button.setOnClickListener { setToCreateMakerPage() }
     }
 

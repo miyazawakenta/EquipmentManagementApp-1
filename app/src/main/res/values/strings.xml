@@ -40,6 +40,9 @@
     <string name="note_label">メモ・備考</string>
     <string name="purchase_date_label">購入日</string>
     <string name="equipment_management_number_string">%1s-%2s</string>
+    <string name="host_name">ホスト名</string>
+    <string name="mac_address">MACアドレス</string>
+    <string name="os">OS</string>
 
     <string name="create">新規登録</string>
     <string name="save">保存</string>
@@ -48,4 +51,8 @@
     <string name="update">更新</string>
     <string name="select">選択</string>
     <string name="search">検索</string>
+
+
+    <string name="with_hyphen">%1s-</string>
+    <string name="relation_equipment">関連機器</string>
 </resources>

@@ -10,9 +10,41 @@
         android:padding="10dp"
         android:layout_height="match_parent">
 
+        <!-- カテゴリー -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/category" />
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:id="@+id/category_name_label"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
+        </TableRow>
+
+        <!-- 管理番号 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/management_number_label"
@@ -20,19 +52,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/management_number_label" />
-
-            <TextView
-                android:id="@+id/management_number"
+            <LinearLayout
+                android:gravity="center_horizontal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_weight="0.5" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/management_number"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content"
+                     android:layout_width="wrap_content" />
+            </LinearLayout>
 
         </TableRow>
 
+        <!-- メーカー -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/maker_label"
@@ -49,9 +88,11 @@
                 android:layout_weight="0.5" />
         </TableRow>
 
+        <!-- モデル名 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/model_name_label"
@@ -71,9 +112,11 @@
                 android:inputType="text" />
         </TableRow>
 
+        <!-- 種別 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/equipment_type_label"
@@ -91,9 +134,59 @@
                 android:autofillHints=""
                 android:inputType="text" />
         </TableRow>
+
+        <!-- MACアドレス -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/mac_address_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:labelFor="@id/mac_address"
+                android:text="@string/mac_address" />
+
+            <EditText
+                android:id="@+id/mac_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:autofillHints="00-00-00-00-00-00"
+                android:digits="0123456789abcdefABCDEF-"
+                android:maxLength="17"
+                android:inputType="text" />
+        </TableRow>
+
+        <!-- ホスト名 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/host_name_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:labelFor="@id/host_name"
+                android:text="@string/host_name" />
+
+            <EditText
+                android:id="@+id/host_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:autofillHints=""
+                android:inputType="text" />
+        </TableRow>
+
+        <!-- 使用者 -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/user_id_label"
@@ -109,9 +202,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5" />
         </TableRow>
+
+        <!-- 用途 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/usage_label"
@@ -129,9 +225,12 @@
                 android:autofillHints=""
                 android:inputType="text" />
         </TableRow>
+
+        <!-- メモ・備考 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/note_label"
@@ -149,9 +248,12 @@
                 android:autofillHints=""
                 android:inputType="text" />
         </TableRow>
+
+        <!-- 購入日 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <TextView
                 android:id="@+id/purchase_date_label"
@@ -171,9 +273,60 @@
                     />
         </TableRow>
 
+        <!-- 関連機器 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:labelFor="@id/purchase_date"
+                android:text="@string/relation_equipment" />
+            <TextView
+                android:id="@+id/selected_relationships"
+                android:layout_marginStart="10dp"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                />
+            <Button
+                android:id="@+id/select_relation_equipment_dialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select"
+                />
+        </TableRow>
+
+        <!-- OS -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:labelFor="@id/purchase_date"
+                android:text="@string/os" />
+
+            <EditText
+                android:id="@+id/os"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:inputType="text"
+                android:autofillHints=""
+                />
+        </TableRow>
+
+        <!-- 登録ボタン -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
 
             <Button
                 android:id="@+id/equipment_create_button"
