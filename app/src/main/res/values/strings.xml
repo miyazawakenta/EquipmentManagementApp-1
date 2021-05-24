@@ -51,6 +51,7 @@
     <string name="update">更新</string>
     <string name="select">選択</string>
     <string name="search">検索</string>
+    <string name="start_camera">カメラ起動</string>
 
 
     <string name="with_hyphen">%1s-</string>

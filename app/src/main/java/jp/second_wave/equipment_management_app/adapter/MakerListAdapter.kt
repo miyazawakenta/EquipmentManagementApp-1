@@ -28,8 +28,8 @@ class MakerListAdapter(private val context: Context, private val makers: List<Ma
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var viewHolder : ViewHolder? = null
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val viewHolder : ViewHolder?
         var view = convertView
 
         // 再利用の設定
@@ -50,8 +50,8 @@ class MakerListAdapter(private val context: Context, private val makers: List<Ma
         val maker = makers[position]
         val makeName = maker.makerName
         viewHolder.nameView.text = makeName
-        viewHolder.deleteView.setOnClickListener { _ ->
-            val dialog = MakerDeleteModalFragment(maker)
+        viewHolder.deleteView.setOnClickListener {
+            val dialog = MakerDeleteModalFragment(maker, parent)
             dialog.show(Fragment, "simple")
         }
         return view!!

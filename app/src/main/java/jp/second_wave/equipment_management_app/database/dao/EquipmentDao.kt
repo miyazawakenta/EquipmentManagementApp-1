@@ -27,4 +27,7 @@ interface EquipmentDao {
 
     @Query("SELECT MAX(management_number) FROM equipments WHERE category_id = :categoryId")
     fun getMaxManagementNumber(categoryId: Int): Int
+
+    @Query("SELECT COUNT(*) FROM equipments WHERE maker_id = :makerId")
+    fun getEquipmentIncludeMaker(makerId: Int): Int
 }
