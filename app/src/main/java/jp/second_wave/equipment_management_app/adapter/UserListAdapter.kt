@@ -29,7 +29,7 @@ class UserListAdapter(private val context: Context, private val users: List<User
         return position.toLong()
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var viewHolder : MakerListAdapter.ViewHolder? = null
         var view = convertView
 
@@ -56,7 +56,7 @@ class UserListAdapter(private val context: Context, private val users: List<User
         }
 
         viewHolder.deleteView.setOnClickListener { _ ->
-            val dialog = UserDeleteModalFragment(user)
+            val dialog = UserDeleteModalFragment(user, parent)
             dialog.show(Fragment, "simple")
         }
         return view!!

@@ -31,15 +31,21 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    suspend fun getEquipmentIncludeMaker(makerId: Int) :Int {
-        return withContext(Dispatchers.IO) {
-            dao.getEquipmentIncludeMaker(makerId)
-        }
-    }
-
     suspend fun getMaxManagementNumber(categoryId: Int) :Int {
         return withContext(Dispatchers.IO) {
             dao.getMaxManagementNumber(categoryId)
+        }
+    }
+
+    suspend fun getEquipmentIncludeMaker(userId: Int) :Int {
+        return withContext(Dispatchers.IO) {
+            dao.getEquipmentIncludeMaker(userId)
+        }
+    }
+
+    suspend fun getEquipmentIncludeUser(userId: Int) :Int {
+        return withContext(Dispatchers.IO) {
+            dao.getEquipmentIncludeUser(userId)
         }
     }
 

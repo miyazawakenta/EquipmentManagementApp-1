@@ -30,4 +30,7 @@ interface EquipmentDao {
 
     @Query("SELECT COUNT(*) FROM equipments WHERE maker_id = :makerId")
     fun getEquipmentIncludeMaker(makerId: Int): Int
+
+    @Query("SELECT COUNT(*) FROM equipments WHERE user_id = :userId")
+    fun getEquipmentIncludeUser(userId: Int): Int
 }
