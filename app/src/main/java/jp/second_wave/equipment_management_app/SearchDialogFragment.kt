@@ -7,9 +7,10 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
 
-class SearchDialogFragment(private val items: Map<Int, String>) : DialogFragment() {
+class SearchDialogFragment(private val items: MutableMap<Int, String>) : DialogFragment() {
 
     var result = ArrayList<Int>()
+    var resultLabel = ArrayList<String>()
     private lateinit var listener: ParentFragmentListener
 
     interface ParentFragmentListener {
@@ -29,15 +30,16 @@ class SearchDialogFragment(private val items: Map<Int, String>) : DialogFragment
             .setTitle(getString(R.string.select))
             .setMultiChoiceItems(items.map { it.value }.toTypedArray(), checkedItems) { _, which, isChecked ->
                 checkedItems[which] = isChecked
+                val id  = items.keys.toList()[which]
+                if (isChecked) {
+                    result.add(id)
+                    resultLabel.add("${items[id]}")
+                } else {
+                    result.remove(id)
+                    resultLabel.remove(items[id])
+                }
             }
             .setPositiveButton("OK") { _, _ ->
-                checkedItems.forEachIndexed { index, b ->
-                    if (b) {
-                        result.add(index + 1)
-                    } else {
-                        result.remove(index + 1)
-                    }
-                }
                 listener.onClickButton()
             }
 

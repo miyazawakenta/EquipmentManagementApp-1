@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-    "identityHash": "7231446e0d76f89ff4b0710eedd7e0f7",
+    "version": 3,
+    "identityHash": "f06a04802f0178981083d4bfb0044bef",
     "entities": [
       {
         "tableName": "users",
@@ -44,7 +44,7 @@
       },
       {
         "tableName": "equipments",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `management_number` INTEGER NOT NULL, `category_id` INTEGER NOT NULL, `maker_id` INTEGER NOT NULL, `model_name` TEXT NOT NULL, `equipment_type` TEXT, `user_id` INTEGER, `usage` TEXT, `note` TEXT, `purchase_date` INTEGER, `os` TEXT, FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`maker_id`) REFERENCES `makers`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `management_number` INTEGER NOT NULL, `category_id` INTEGER NOT NULL, `maker_id` INTEGER NOT NULL, `model_name` TEXT NOT NULL, `equipment_type` TEXT, `user_id` INTEGER, `usage` TEXT, `note` TEXT, `host_name` TEXT, `purchase_date` INTEGER, `os` TEXT, FOREIGN KEY(`user_id`) REFERENCES `users`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`maker_id`) REFERENCES `makers`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`category_id`) REFERENCES `categories`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
@@ -97,6 +97,12 @@
           {
             "fieldPath": "note",
             "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "hostName",
+            "columnName": "host_name",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -355,7 +361,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7231446e0d76f89ff4b0710eedd7e0f7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f06a04802f0178981083d4bfb0044bef')"
     ]
   }
 }

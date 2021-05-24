@@ -1,25 +1,37 @@
 package jp.second_wave.equipment_management_app
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
+import android.view.inputmethod.InputMethodManager
+import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import jp.second_wave.equipment_management_app.adapter.EquipmentListAdapter
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
 import jp.second_wave.equipment_management_app.database.view_model.CategoryViewModel
 import jp.second_wave.equipment_management_app.database.view_model.EquipmentViewModel
+import jp.second_wave.equipment_management_app.database.view_model.MakerViewModel
 import jp.second_wave.equipment_management_app.database.view_model.UserViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentListener {
+
+    private lateinit var searchManagementNumberEditText: EditText
+    private var searchCategoryValues = ArrayList<Int>()
+    private var searchUserValues = ArrayList<Int>()
+    private var searchMakerValues = ArrayList<Int>()
+    private lateinit var categorySearchDialogFragment: SearchDialogFragment
+    private lateinit var userSearchDialogFragment: SearchDialogFragment
+    private lateinit var makerSearchDialogFragment: SearchDialogFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,19 +39,24 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
         setEquipmentList()
         setSearchOptions()
 
-        val createEquipmentButton = findViewById<Button>(R.id.create_equipment_button)
+        val createEquipmentButton = findViewById<ImageButton>(R.id.create_equipment_button)
         createEquipmentButton.setOnClickListener { startCreateEquipment() }
 
         val searchButton = findViewById<Button>(R.id.search_button)
         searchButton.setOnClickListener { searchEquipment() }
+
+        searchManagementNumberEditText = findViewById(R.id.search_management_number)
+        searchManagementNumberEditText.addTextChangedListener(managementNumberTextWatcher)
     }
 
-    private var searchCategoryValues = ArrayList<Int>()
-    private var searchUserValues = ArrayList<Int>()
-    private lateinit var categorySearchDialogFragment: SearchDialogFragment
-    private lateinit var userSearchDialogFragment: SearchDialogFragment
 
     private fun searchEquipment() {
+        val view = this.currentFocus
+        if (view != null) {
+            val manager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            manager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+
         val vSearchModel = findViewById<EditText>(R.id.search_model_name)
 
         val equipmentViewModel: EquipmentViewModel by viewModels()
@@ -48,6 +65,8 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
             val equipments = equipmentViewModel.getEquipmentAndRelationAll(
                 searchCategoryValues,
                 searchUserValues,
+                searchMakerValues,
+                searchManagementNumberEditText.text.toString(),
                 vSearchModel.text.toString()
             )
             val adapter = EquipmentListAdapter(applicationContext, equipments)
@@ -60,22 +79,31 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
     private fun setSearchOptions() {
         val categoryViewModel: CategoryViewModel by viewModels()
         val userViewModel: UserViewModel by viewModels()
+        val makerViewModel: MakerViewModel by viewModels()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val categories = categoryViewModel.getAll()
-            categorySearchDialogFragment = SearchDialogFragment(categories.map { it.id to it.CategoryName }.toMap())
-
+            val categories = mutableMapOf<Int, String>()
+            categoryViewModel.getAll().forEach { category -> categories[category.id] = category.CategoryName }
+            categorySearchDialogFragment = SearchDialogFragment(categories)
             val categoryDialogButton = findViewById<Button>(R.id.category_dialog_button)
             categoryDialogButton.setOnClickListener {
                 categorySearchDialogFragment.show(supportFragmentManager, "simple")
             }
 
-            val users = userViewModel.getAll()
-            userSearchDialogFragment = SearchDialogFragment(users.map { it.id to it.lastName }.toMap())
-
+            val users = mutableMapOf<Int, String>()
+            userViewModel.getAll().forEach { user ->  users[user.id] = user.lastName }
+            userSearchDialogFragment = SearchDialogFragment(users)
             val userDialogButton = findViewById<Button>(R.id.user_dialog_button)
             userDialogButton.setOnClickListener {
                 userSearchDialogFragment.show(supportFragmentManager, "simple")
+            }
+
+            val makers = mutableMapOf<Int, String>()
+            makerViewModel.getAll().forEach { maker ->  makers[maker.id] = maker.makerName }
+            makerSearchDialogFragment = SearchDialogFragment(makers)
+            val makerDialogButton = findViewById<Button>(R.id.maker_dialog_button)
+            makerDialogButton.setOnClickListener {
+                makerSearchDialogFragment.show(supportFragmentManager, "simple")
             }
         }
     }
@@ -114,5 +142,36 @@ class MainActivity : AppCompatActivity(), SearchDialogFragment.ParentFragmentLis
     override fun onClickButton() {
         searchCategoryValues = categorySearchDialogFragment.result
         searchUserValues = userSearchDialogFragment.result
+        searchMakerValues = makerSearchDialogFragment.result
+
+        val categories = findViewById<TextView>(R.id.selected_categories)
+        categories.text = categorySearchDialogFragment.resultLabel.joinToString()
+
+        val users = findViewById<TextView>(R.id.selected_users)
+        users.text = userSearchDialogFragment.resultLabel.joinToString()
+
+        val makers = findViewById<TextView>(R.id.selected_makers)
+        makers.text = makerSearchDialogFragment.resultLabel.joinToString()
+    }
+
+    private val pattern: Pattern = Pattern.compile("[0-9]{2}")
+
+    private val managementNumberTextWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (before == 0) {
+                if (pattern.matcher(s).matches()) {
+                    searchManagementNumberEditText.setText(resources.getString(R.string.with_hyphen, s))
+                    searchManagementNumberEditText.setSelection(searchManagementNumberEditText.editableText.toString().length)
+                }
+            } else {
+                if (pattern.matcher(s).matches()) {
+                    searchManagementNumberEditText.setText(s.subSequence(0, s.length -1))
+                    searchManagementNumberEditText.setSelection(searchManagementNumberEditText.editableText.toString().length)
+                }
+            }
+        }
     }
 }

@@ -4,39 +4,35 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import jp.second_wave.equipment_management_app.database.AppDatabase
-import jp.second_wave.equipment_management_app.database.dao.CategoryDao
-import jp.second_wave.equipment_management_app.database.entitiy.Category
+import jp.second_wave.equipment_management_app.database.dao.MacAddressDao
+import jp.second_wave.equipment_management_app.database.entitiy.MacAddress
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class CategoryViewModel(application: Application) : AndroidViewModel(application) {
-    private val dao: CategoryDao
+class MacAddressViewModel(application: Application) : AndroidViewModel(application) {
+    private val dao: MacAddressDao
 
     init {
         val db = AppDatabase.buildDatabase(application)
-        dao = db.categoryDao()
+        dao = db.macAddressDao()
     }
 
-    suspend fun findById(id : Int) : Category {
+    suspend fun findById(id: Int) : MacAddress {
         return withContext(Dispatchers.IO) {
             dao.findById(id)
         }
     }
-    suspend fun getAll() : List<Category> {
-        return withContext(Dispatchers.IO) {
-            dao.getAll()
-        }
-    }
-    fun insert(category: Category) {
+
+    fun insert(v: MacAddress) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.insert(category)
+            dao.insert(v)
         }
     }
 
-    fun update(category: Category) {
+    fun delete(v : MacAddress) {
         viewModelScope.launch(Dispatchers.IO) {
-            dao.update(category)
+            dao.delete(v)
         }
     }
 }

@@ -25,7 +25,7 @@ import androidx.room.PrimaryKey
     ]
 )
 data class Equipment(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Int = 0,
     @ColumnInfo(name = "management_number") val managementNumber: Int,
     @ColumnInfo(name = "category_id") val categoryId: Int,
     @ColumnInfo(name = "maker_id") var makerId: Int,
@@ -34,5 +34,7 @@ data class Equipment(
     @ColumnInfo(name = "user_id") var userId: Int?,
     var usage: String?,
     var note: String?,
-    var purchase_date: java.util.Date?
+    @ColumnInfo(name = "host_name") var hostName: String?,
+    var purchase_date: java.util.Date?,
+    var os: String?
 )

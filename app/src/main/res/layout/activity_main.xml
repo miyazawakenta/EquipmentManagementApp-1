@@ -18,12 +18,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- 検索 -->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="@drawable/border"
             android:layout_height="wrap_content">
 
+            <!-- カテゴリー -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:gravity="center"
@@ -39,35 +41,24 @@
                     android:layout_width="match_parent"
                     android:gravity="end"
                     android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/selected_categories"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1" />
+
                     <Button
                         android:id="@+id/category_dialog_button"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
                         android:text="@string/select" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/model_name_label" />
-
-                <EditText
-                    android:id="@+id/search_model_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="text"
-                    android:text="" />
-            </LinearLayout>
-
+            <!-- 使用者 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -84,30 +75,119 @@
                     android:gravity="end"
                     android:layout_height="wrap_content">
 
+                    <TextView
+                        android:id="@+id/selected_users"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1" />
+
                     <Button
                         android:id="@+id/user_dialog_button"
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
                         android:text="@string/select" />
                 </LinearLayout>
             </LinearLayout>
 
+            <!-- メーカー -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/maker" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/selected_makers"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:id="@+id/maker_dialog_button"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="10dp"
+                        android:text="@string/select" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 管理番号 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/search_model_name"
+                    android:text="@string/management_number_label" />
+
+                <EditText
+                    android:id="@+id/search_management_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text=""
+                    android:autofillHints="" />
+            </LinearLayout>
+
+            <!-- モデル -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@id/search_model_name"
+                    android:text="@string/model_name_label" />
+
+                <EditText
+                    android:id="@+id/search_model_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:text=""
+                    android:autofillHints="" />
+            </LinearLayout>
+
+            <!-- 検索ボタン -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/search_button"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:text="@string/search" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,11 +196,14 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/create_equipment_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/equipment_create" />
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@null"
+                android:src="@android:drawable/ic_menu_add" />
         </LinearLayout>
 
         <LinearLayout

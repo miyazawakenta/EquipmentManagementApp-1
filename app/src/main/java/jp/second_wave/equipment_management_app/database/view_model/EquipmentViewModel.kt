@@ -40,6 +40,8 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
     suspend fun getEquipmentAndRelationAll(
         categoryIds: List<Int> = arrayListOf(),
         userIds: List<Int> = arrayListOf(),
+        makerIds: List<Int> = arrayListOf(),
+        managementNumber: String = "",
         modelName: String = ""
     ) :List<EquipmentAndRelation> {
 
@@ -47,14 +49,17 @@ class EquipmentViewModel(application: Application) : AndroidViewModel(applicatio
             dao.getEquipmentAndRelationAll().filter {
                 val category = if (categoryIds.isEmpty()) true else categoryIds.contains(it.category.id)
                 val user = if (userIds.isEmpty()) true else userIds.contains(it.user.id)
-                val model = if (modelName == "") true else Regex(modelName).containsMatchIn(it.equipment.modelName)
-                category && user && model
+                val maker = if (makerIds.isEmpty()) true else makerIds.contains(it.maker.id)
+                val model = if (modelName == "") true else Regex(modelName.toLowerCase()).containsMatchIn(it.equipment.modelName.toLowerCase())
+                val itManagementNumber = String.format("%2s", it.equipment.categoryId.toString()).replace(" ", "0") + "-" + String.format("%3s", it.equipment.managementNumber.toString()).replace(" ", "0")
+                val managementNumber = if(managementNumber == "") true else managementNumber == itManagementNumber
+                category && user && maker && model && managementNumber
             }
         }
     }
 
-    fun insert(equipment: Equipment) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun insert(equipment: Equipment) : Long {
+        return withContext(Dispatchers.IO) {
             dao.insert(equipment)
         }
     }
