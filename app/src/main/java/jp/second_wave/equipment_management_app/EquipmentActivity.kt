@@ -1,16 +1,11 @@
 package jp.second_wave.equipment_management_app
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import jp.second_wave.equipment_management_app.database.entitiy.Equipment
 import jp.second_wave.equipment_management_app.database.entitiy.Maker
 import jp.second_wave.equipment_management_app.database.entitiy.User
@@ -24,11 +19,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 
 class EquipmentActivity : AppCompatActivity() {
-
-    companion object {
-        const val CAMERA_REQUEST_CODE = 1
-        const val CAMERA_PERMISSION_REQUEST_CODE = 2
-    }
 
     private var categoryId = 0
     private var equipmentId = 0
@@ -243,65 +233,6 @@ class EquipmentActivity : AppCompatActivity() {
 
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        }
-    }
-
-    // 以下、カメラ関係
-    // エミュレータだとカメラ取得できない？ため動作確認できてない
-    // 処理は動いているみたい
-    override fun onResume() {
-        super.onResume()
-        setContentView(R.layout.activity_equipment)
-
-        val cameraButton: Button = findViewById<View>(R.id.start_camera_button) as Button
-        cameraButton.setOnClickListener {
-            println("ボタンは押されました")
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).resolveActivity(packageManager)
-            if (intent != null) {
-                println("intent != null")
-                if (checkCameraPermission()) {
-                    println("checkCameraPermission() is true")
-                    takePicture()
-                } else {
-                    println("checkCameraPermission() is false")
-                    grantCameraPermission()
-                }
-            } else {
-                println("intent == null")
-                val toast: Toast = Toast.makeText(this, "カメラありません", Toast.LENGTH_SHORT)
-                toast.show()
-            }
-        }
-    }
-
-    private fun takePicture() {
-        println("takePicture()")
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            addCategory(Intent.CATEGORY_DEFAULT)
-        }
-
-        startActivityForResult(intent, CAMERA_REQUEST_CODE)
-    }
-
-    private fun checkCameraPermission() = PackageManager.PERMISSION_GRANTED ==
-            ContextCompat.checkSelfPermission(applicationContext, Manifest.permission.CAMERA)
-
-
-    private fun grantCameraPermission() {
-        println("grantCameraPermission()")
-        ActivityCompat.requestPermissions(this,
-            arrayOf(Manifest.permission.CAMERA),
-            CAMERA_PERMISSION_REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<out String>,
-                                            grantResults: IntArray) {
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() &&
-                grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                takePicture()
-            }
         }
     }
 }
